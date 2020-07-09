@@ -22,3 +22,9 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+*Dùng token với form post để chống CFRS
+
+*Sử dụng ssl để chống việc sử dụng gói sniffer để phát hiện cookie được truyền qua các mạng không an toàn
+
+*sử dụng băm remember token để tránh việc ăn cắp
