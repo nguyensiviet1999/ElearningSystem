@@ -1,0 +1,11 @@
+<div class="row">
+  <div class= "col-md-6 col-md-3-offset">
+    <h2>Them moi The loai</h2>
+    <%=form_for(@category , html: {multipart:true}) do |f|%>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label "Name of category" %>
+      <%= f.text_field(:name_category, class: 'form-control') %>
+      <%= f.submit "Them moi", class: "btn btn-primary" %>
+    <%end%>
+  </div>
+</div>

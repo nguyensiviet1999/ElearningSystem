@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number_word_learned: 1
+  user: one
+  course: one
+
+two:
+  number_word_learned: 1
+  user: two
+  course: two

@@ -3,6 +3,8 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest
   mount_uploader :avatar, PictureUploader
+  has_many :results, class_name: "Result", foreign_key: "user_id", dependent: :destroy
+  has_many :courses, through: :results, source: :course
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true, length: { maximum: 50 }
@@ -58,6 +60,20 @@ class User < ApplicationRecord
 
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  #user tham gia khoá học
+  def join_to_course(course)
+    results.create(course_id: course.id)
+  end
+
+  #user huỷ tham gia khoá học
+  def leave_to_course(course)
+    results.find_by(course_id: course.id).destroy
+  end
+#check xem user có join khoá học hay chưa
+  def joined_course?(course)
+    courses.include?(course)
   end
 
   private

@@ -10,7 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_040933) do
+ActiveRecord::Schema.define(version: 2020_07_13_071842) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name_category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "course_name"
+    t.integer "category_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+    t.index ["category_id"], name: "index_courses_on_category_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer "number_word_learned"
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_results_on_course_id"
+    t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
+  create_table "user_learned_words", force: :cascade do |t|
+    t.integer "word_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_learned_words_on_user_id"
+    t.index ["word_id"], name: "index_user_learned_words_on_word_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -29,4 +74,20 @@ ActiveRecord::Schema.define(version: 2020_07_10_040933) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "words", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.string "word"
+    t.string "meaning"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
+    t.index ["course_id"], name: "index_words_on_course_id"
+  end
+
+  add_foreign_key "courses", "categories"
+  add_foreign_key "results", "courses"
+  add_foreign_key "results", "users"
+  add_foreign_key "user_learned_words", "users"
+  add_foreign_key "user_learned_words", "words"
+  add_foreign_key "words", "courses"
 end
