@@ -1,14 +1,7 @@
 <% provide(:title, "Home") %>
+<div class="row"><a class="btn btn-success" href = <%=new_course_path%>>Them khoa hoc</a></div>
+<div class="row"><a class="btn btn-success" href = <%=new_category_path%>>Them the loai</a></div>
 <div class="row">
-  <div class="col-md-6 course">
-    <h2>English Basic</h2>
-    <hr>
-    <img src="https://i1.wp.com/ritajms.com/wp-content/uploads/2019/11/52351011-english-british-england-language-education-concept.jpg?w=1300&ssl=1">
-  </div>
-  <div class="col-md-6 course">
-    <h2>English For IT</h2>
-    <hr>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS-voaDBnmhvZDlTTY8-yjHNnmzhxBhGq_0yw&usqp=CAU">
-    <>
-  </div>
+  <%= render 'shared/course' %>
 </div>
+<%= will_paginate @courses %>

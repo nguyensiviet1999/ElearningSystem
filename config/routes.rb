@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  get "category/new"
+  get "courses/show"
+  get "courses/new"
+  get "courses/create"
+  get "courses/edit"
+  get "courses/update"
+  get "courses/delete"
+  get "password_resets/new"
+  get "password_resets/edit"
   get "sessions/new"
   get "static_pages/home"
   get "static_pages/help"
@@ -13,5 +22,8 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   resources :users
   resources :account_activations, only: [:edit]
-  
+  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :courses, only: [:show, :new, :create, :edit, :update, :delete]
+  resources :categories, only: [:new, :create]
+  resources :results, only: [:create, :destroy]
 end

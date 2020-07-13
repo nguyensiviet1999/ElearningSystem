@@ -1,10 +1,14 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
+  mount_uploader :avatar, PictureUploader
+  has_many :results, class_name: "Result", foreign_key: "user_id", dependent: :destroy
+  has_many :courses, through: :results, source: :course
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true, length: { maximum: 50 }
+  validate :picture_size
 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_blank: true
@@ -44,6 +48,34 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+  #user tham gia khoá học
+  def join_to_course(course)
+    results.create(course_id: course.id)
+  end
+
+  #user huỷ tham gia khoá học
+  def leave_to_course(course)
+    results.find_by(course_id: course.id).destroy
+  end
+#check xem user có join khoá học hay chưa
+  def joined_course?(course)
+    courses.include?(course)
+  end
+
   private
 
   # Converts email to all lowercase.
@@ -55,5 +87,12 @@ class User < ApplicationRecord
   def create_activation_digest
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
+  end
+
+  # Validates the size of an uploaded picture.
+  def picture_size
+    if avatar.size > 5.megabytes
+      errors.add(:avatar, "should be less than 5MB")
+    end
   end
 end

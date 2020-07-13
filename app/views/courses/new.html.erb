@@ -1,0 +1,16 @@
+<div class="row">
+  <div class= "col-md-6 col-md-3-offset">
+    <h2>Them moi khoa hoc</h2>
+    <%=form_for(@course , html: {multipart:true}) do |f|%>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label "Name of Course" %>
+      <%= f.text_field(:course_name, class: 'form-control') %>
+      <%= f.label "Category" %>
+      <%= f.select(:category_id, @options_category) %>
+      <span class="picture">
+        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+      </span>
+      <%= f.submit "Them moi", class: "btn btn-primary" %>
+    <%end%>
+  </div>
+</div>

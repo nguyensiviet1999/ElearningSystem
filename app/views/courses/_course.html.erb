@@ -1,0 +1,21 @@
+<div class="col-md-6 course">
+    <h2> <%= link_to course.course_name, course %></a></h2>
+    
+    <% if current_user.joined_course?(course) %>
+    <%= link_to "Tiếp tục", course %>
+    <% else %>
+    <%= form_for(current_user.results.build) do |f| %>
+  <div><%= hidden_field_tag :course_id, course.id %></div>
+  <%= f.submit "Bắt đầu", class: "btn btn-success" %>
+<% end %>
+    <% end %>
+    <hr>
+    <%= link_to image_tag(course.image.url, alt: "Course logo"), course %>
+    <ul>
+      <li>
+        Tổng số từ: 500
+      </li>
+      <li>  Số từ đã học: 20/500</li>
+       <a href="#" class = "btn btn-success">Kiểm tra</a>
+    </ul>
+  </div>
