@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(edit_profile_params)
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -67,5 +67,9 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  def edit_profile_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
   end
 end
