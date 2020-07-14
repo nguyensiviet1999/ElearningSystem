@@ -71,7 +71,8 @@ class User < ApplicationRecord
   def leave_to_course(course)
     results.find_by(course_id: course.id).destroy
   end
-#check xem user có join khoá học hay chưa
+
+  #check xem user có join khoá học hay chưa
   def joined_course?(course)
     courses.include?(course)
   end

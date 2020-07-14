@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-  get "category/new"
-  get "courses/show"
-  get "courses/new"
-  get "courses/create"
-  get "courses/edit"
-  get "courses/update"
-  get "courses/delete"
-  get "password_resets/new"
-  get "password_resets/edit"
   get "sessions/new"
   get "static_pages/home"
   get "static_pages/help"
@@ -20,10 +11,19 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  resources :users
+  resources :users do
+    member do
+      get :all_joined_courses
+    end
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :courses, only: [:show, :new, :create, :edit, :update, :delete]
+  resources :courses do
+    member do
+      get :words_of_course,:learn
+    end
+  end
   resources :categories, only: [:new, :create]
   resources :results, only: [:create, :destroy]
+  resources :words
 end

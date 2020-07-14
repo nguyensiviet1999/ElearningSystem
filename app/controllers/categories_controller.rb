@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      flash.now[:success] = "Them thanh cong"
+      flash[:success] = "Them thanh cong"
       redirect_to root_path
     else
       render "new"

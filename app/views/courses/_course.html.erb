@@ -2,7 +2,7 @@
     <h2> <%= link_to course.course_name, course %></a></h2>
     
     <% if current_user.joined_course?(course) %>
-    <%= link_to "Tiếp tục", course %>
+    <%= link_to "Tiếp tục", course , class: "btn btn-success" %>
     <% else %>
     <%= form_for(current_user.results.build) do |f| %>
   <div><%= hidden_field_tag :course_id, course.id %></div>
@@ -13,7 +13,7 @@
     <%= link_to image_tag(course.image.url, alt: "Course logo"), course %>
     <ul>
       <li>
-        Tổng số từ: 500
+        Tổng số từ: <%= course.words.count %>
       </li>
       <li>  Số từ đã học: 20/500</li>
        <a href="#" class = "btn btn-success">Kiểm tra</a>

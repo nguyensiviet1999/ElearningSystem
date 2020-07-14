@@ -1,0 +1,21 @@
+<article>
+  <div class= "words position-relative">
+    <div class="row">
+      <div class="col-md-4 english">
+        <h1><a href="<%=learn_course_path(course_id: word.course.id,word_id: word.id) %>"><%= word.word%></a></h1>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <h2><%= word.pronounce%></h2>
+        </div>
+        <div><b><%= word.meaning%></b></div>
+      </div>
+      <div class="col-md-4">
+        <div>
+          <%= image_tag word.image.url %>
+          <a href="#"><i class="fa fa-volume-down icon-play-audio"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

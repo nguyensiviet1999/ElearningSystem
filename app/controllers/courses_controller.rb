@@ -1,5 +1,8 @@
 class CoursesController < ApplicationController
   def show
+    @course = Course.find(params[:id])
+    @learning_words = @course.words.paginate(page: params[:page])
+    puts @learning_words.inspect
   end
 
   def new
@@ -29,6 +32,18 @@ class CoursesController < ApplicationController
   end
 
   def delete
+  end
+
+  def words_of_course
+    @course = Course.find(params[:id])
+    @words_of_course = @course.words
+  end
+
+  def learn
+    @course = Course.find(params[:course_id])
+    @current_word = Word.find(params[:word_id]).blank? ? 0 : Word.find(params[:word_id])
+    @learning_words = @course.words
+    puts @current_word.inspect
   end
 
   private

@@ -1,6 +1,27 @@
-<% provide(:title, "Home") %>
-<div class="row"><a class="btn btn-success" href = <%=new_course_path%>>Them khoa hoc</a></div>
-<div class="row"><a class="btn btn-success" href = <%=new_category_path%>>Them the loai</a></div>
+<%@title ||= "Home"%>
+<% provide(:title, @title) %>
+<% @user ||= current_user %>
+<div class="row">
+  <div class="col-md-2">
+    <a class="btn btn-success" href = <%=new_course_path%>>Them khoa hoc</a>
+  </div>
+  <div class="col-md-2">
+    <a class="btn btn-success" href = <%=new_category_path%>>Them the loai</a>
+  </div>
+  <div class="col-md-2">
+    <a class="btn btn-success" href = <%=new_word_path%>>Them cac word</a>
+  </div>
+  <div class="col-md-2">
+    <% if @title == "Home" %>
+      <a class="btn btn-success" href = <%=all_joined_courses_user_path(@user)%>>Cac khoa da join</a>
+    <% else %>
+      <a class="btn btn-success" href = <%=root_url%>>Tat ca cac khoa hoc</a>
+    <% end %>
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>
+<hr>
 <div class="row">
   <%= render 'shared/course' %>
 </div>

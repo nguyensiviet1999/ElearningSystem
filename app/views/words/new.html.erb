@@ -1,0 +1,35 @@
+<div class="row">
+  <div class = "col-md-8 col-md-offset-2">
+    <h1>Them tu moi</h2>
+    <%= form_for @word do |f| %>
+      <div class="col-md-6">
+        <%= f.label :word, "Nhap tu" %>
+        <%= f.text_field :word,class:"form-control", placeholder: "abc"%>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :pronounce, "Nhap phat am" %>
+        <%= f.text_field :pronounce,class:"form-control", placeholder: "abc"%>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :word_type, "Nhap loai tu" %>
+        <%= f.text_field :word_type,class:"form-control", placeholder: "abc"%>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :meaning, "Nhap nghia tuong ung" %>
+        <%= f.text_field :meaning,class:"form-control", placeholder: "abc"%>
+      </div>
+      <br>
+      <div class="col-md-6">
+        <%= f.label :course_id, "Chon khoa hoc" %>
+        <%= f.select(:course_id, @options_course, class:"form-control" ) %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :image, "Chon hinh anh" %>
+        <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+      </div>
+      <%= f.submit "Them tu",class:"form-control btn btn-success"%>
+    <% end %>
+  </div>
+</div>
+pronounce
+word type
