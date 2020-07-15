@@ -4,6 +4,12 @@
 // img {
 #carousel-example-2{
     .row{
+        .carousel-inner{
+            border: 1px solid gray;
+            border-radius: 20px;
+            padding: 10px 10px 10px 10px;
+        }
+   
         .carousel-control-prev{
             img{
                 height: 50px;
@@ -22,5 +28,14 @@
             margin: auto;
             display: block;
         }
+        .answer{
+            margin: auto;
+            display: block;
+        }
+        .carousel-item a{ 
+            margin: auto;
+            display: block;
+        }
+
     }
 }

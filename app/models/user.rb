@@ -5,6 +5,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, PictureUploader
   has_many :results, class_name: "Result", foreign_key: "user_id", dependent: :destroy
   has_many :courses, through: :results, source: :course
+  has_many :user_learned_words, class_name: "UserLearnedWord", foreign_key: "user_id", dependent: :destroy
+  has_many :learned_words, through: :user_learned_words, source: :word
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true, length: { maximum: 50 }
@@ -75,6 +77,22 @@ class User < ApplicationRecord
   #check xem user có join khoá học hay chưa
   def joined_course?(course)
     courses.include?(course)
+  end
+
+  def learned_word(word)
+    user_learned_words.create(word_id: word.id)
+  end
+
+  def unlearned_word(word)
+    user_learned_words.find_by(word_id: word.id).destroy
+  end
+
+  def learned_words_of_course(course_id)
+    learned_words_of_course = []
+    learned_words.each { |learned_word|
+      learned_words_of_course.push(learned_word) if learned_word.course_id == course_id
+    }
+    return learned_words_of_course
   end
 
   private

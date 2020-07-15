@@ -15,8 +15,7 @@
       <%= f.password_field :password_confirmation, class: 'form-control' %>
       <%= f.submit yield(:button_text), class: "btn btn-primary" %>
       <span class="picture">
-        <%= f.file_field :avatar, accept:
- 'image/jpeg,image/gif,image/png' %>
+        <%= f.file_field :avatar, accept:'image/jpeg,image/gif,image/png' %>
       </span>
       <% if @user.avatar.blank? %>
         <div class="gravatar_edit">

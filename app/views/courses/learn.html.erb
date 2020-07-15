@@ -22,6 +22,7 @@
             <h2><%=word.pronounce%></h2>
             <h2><%=word.meaning%></h2>
             <%= image_tag word.image.url%>
+            <%= link_to  "Kiểm tra các từ đã xem", examination_course_path(current_word_id: word.id), class: "btn btn-success" %>
           </div>
         <% end %>
       </div>

@@ -1,6 +1,10 @@
 <div class="col-md-6 course">
     <h2> <%= link_to course.course_name, course %></a></h2>
     
+    <% if logged_in? %>
+      
+    
+    
     <% if current_user.joined_course?(course) %>
     <%= link_to "Tiếp tục", course , class: "btn btn-success" %>
     <% else %>
@@ -9,13 +13,17 @@
   <%= f.submit "Bắt đầu", class: "btn btn-success" %>
 <% end %>
     <% end %>
+<% end %>
     <hr>
     <%= link_to image_tag(course.image.url, alt: "Course logo"), course %>
     <ul>
       <li>
         Tổng số từ: <%= course.words.count %>
       </li>
-      <li>  Số từ đã học: 20/500</li>
+      
+      <% if logged_in? %>
+         <li>  Số từ đã học: <%=current_user.learned_words_of_course(course.id).count%>/<%= course.words.count %></li>
+      <% end %>
        <a href="#" class = "btn btn-success">Kiểm tra</a>
     </ul>
   </div>

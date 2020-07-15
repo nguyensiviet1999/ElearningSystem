@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "courses/new_release" => "courses#new_release", :as => :new_release
   get "sessions/new"
   get "static_pages/home"
   get "static_pages/help"
@@ -20,10 +21,14 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :courses do
     member do
-      get :words_of_course,:learn
+      get :words_of_course, :learn, :examination, :check_answer
     end
   end
   resources :categories, only: [:new, :create]
   resources :results, only: [:create, :destroy]
-  resources :words
+  resources :words do
+    collection do #collection lay ra 1 tap words , va k can truyen id
+      get :search_word
+    end
+  end
 end

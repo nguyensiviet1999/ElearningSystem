@@ -12,13 +12,14 @@
     <a class="btn btn-success" href = <%=new_word_path%>>Them cac word</a>
   </div>
   <div class="col-md-2">
-    <% if @title == "Home" %>
+    <% if @title == "Home" && logged_in?%>
       <a class="btn btn-success" href = <%=all_joined_courses_user_path(@user)%>>Cac khoa da join</a>
     <% else %>
       <a class="btn btn-success" href = <%=root_url%>>Tat ca cac khoa hoc</a>
     <% end %>
   </div>
   <div class="col-md-2">
+    <a class="btn btn-success" href = <%=words_path%>>Danh sach cac Words</a>
   </div>
 </div>
 <hr>

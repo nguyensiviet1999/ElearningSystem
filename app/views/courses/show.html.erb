@@ -60,7 +60,7 @@
 <!--/.Carousel Wrapper--> %>
 <div class="row">
   <div class = "col-md-2">
-    <%= link_to  "Start to learn",learn_course_path(@course.id) , class:"btn btn-success" %>
+    <%= link_to  "Start to learn",learn_course_path(course_id: @course.id) , class:"btn btn-success" %>
   </div>
 </div>
 <% if !@learning_words.nil? %>
