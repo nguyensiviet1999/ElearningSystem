@@ -6,11 +6,11 @@
     </div>
     <div class="col-md-2">
       <%= label_tag :order, "Thu tu sap xep" %>
-      <%= select_tag(:order, options_for_select([['A-Z','asc'],['Z-A','desc']]), class:"form-control" ) %>
+      <%= select_tag(:order, options_for_select([['A-Z','asc'],['Z-A','desc']]), class:"form-control", ) %>
     </div>
     <div class="col-md-3">
       <%= label_tag :learning_status, "Tinh trang hoc" %>
-      <%= select_tag(:learning_status, options_for_select([['Da hoc',1],['Chua hoc',0]]), class:"form-control" ) %>
+      <%= select_tag(:learning_status, options_for_select([['Da hoc',1],['Chua hoc',0]]), class:"form-control",include_blank: true ) %>
     </div>
     <div class="col-md-2">
       <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">

@@ -2,40 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 // img {
-#carousel-example-2{
-    .row{
-        .carousel-inner{
-            border: 1px solid gray;
-            border-radius: 20px;
-            padding: 10px 10px 10px 10px;
-        }
-   
-        .carousel-control-prev{
-            img{
-                height: 50px;
-                width: 50px;
-            }
-           
-        }
-        .carousel-control-next{
-            img{
-                height: 50px;
-                width: 50px;
-            }
-           
-        }
-        .carousel-item img{
-            margin: auto;
-            display: block;
-        }
-        .answer{
-            margin: auto;
-            display: block;
-        }
-        .carousel-item a{ 
-            margin: auto;
-            display: block;
-        }
-
+#carousel-example-2 {
+  .row {
+    .carousel-inner {
+      border: 1px solid gray;
+      border-radius: 20px;
+      padding: 10px 10px 10px 10px;
     }
+
+    .carousel-control-prev {
+      img {
+        height: 50px;
+        width: 50px;
+      }
+    }
+    .carousel-control-next {
+      img {
+        height: 50px;
+        width: 50px;
+      }
+    }
+    .carousel-item img {
+      margin: auto;
+      display: block;
+    }
+    .answer {
+      margin: auto;
+      display: block;
+    }
+    .carousel-item a {
+      margin: auto;
+      display: block;
+    }
+  }
+  .form-group {
+    .col-xs-3 {
+      margin: auto;
+
+      .row {
+        .col-xs-3{
+          margin-right: 0px;
+          padding-right: 0px;
+        }
+        .col-xs-1 {
+            margin-left: 0px;
+          padding-left: 0px;
+          justify-content: center;
+          text-align: center;
+          margin-top: 5.5px;
+        }
+      }
+    }
+  }
 }

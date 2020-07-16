@@ -2,28 +2,54 @@
 <% provide(:title, @title) %>
 <% @user ||= current_user %>
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-sm">
     <a class="btn btn-success" href = <%=new_course_path%>>Them khoa hoc</a>
   </div>
-  <div class="col-md-2">
+  <div class="col-sm">
     <a class="btn btn-success" href = <%=new_category_path%>>Them the loai</a>
   </div>
-  <div class="col-md-2">
+  <div class="col-sm">
     <a class="btn btn-success" href = <%=new_word_path%>>Them cac word</a>
   </div>
-  <div class="col-md-2">
+  <div class="col-sm">
     <% if @title == "Home" && logged_in?%>
       <a class="btn btn-success" href = <%=all_joined_courses_user_path(@user)%>>Cac khoa da join</a>
     <% else %>
       <a class="btn btn-success" href = <%=root_url%>>Tat ca cac khoa hoc</a>
     <% end %>
   </div>
-  <div class="col-md-2">
+  <div class="col-sm">
     <a class="btn btn-success" href = <%=words_path%>>Danh sach cac Words</a>
   </div>
 </div>
 <hr>
 <div class="row">
-  <%= render 'shared/course' %>
+  <div class="flex-container">
+    <%= render 'shared/course' %>
+  </div>
 </div>
 <%= will_paginate @courses %>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

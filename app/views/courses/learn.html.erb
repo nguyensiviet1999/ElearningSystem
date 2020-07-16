@@ -1,28 +1,28 @@
 <!--Carousel Wrapper-->
 <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
   <!--Indicators-->
-  <ol class="carousel-indicators">
-    <% @learning_words.length.times do|i|%>
-      <li data-target="#carousel-example-2" data-slide-to=" <%= i %>" 
+  <%# <ol class="carousel-indicators"> %>
+    <%# <% @learning_words.length.times do|i|%> %>
+      <%# <li data-target="#carousel-example-2" data-slide-to=" <%= i %>"  %>
       
-        <% if (@learning_words[i] == @current_word) %> class="active" <% end %> >
+        <%# <% if (@learning_words[i] == @current_word) class="active" <% end > %> %> %>
       </li>
-    <%end%>
-  </ol>
+    <%# <%end%> %>
+  <%# </ol> %>
   <!--/.Indicators-->
   <!--Slides-->
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <div class="carousel-inner" role="listbox">
-        <% @learning_words.each do |word| %>
-          <div class="carousel-item 
-                <% if @current_word == word %> active<% end %>" >
+        <% @learning_words.length.times do|i| %>
+          <div class="carousel-item <% if @current_word == @learning_words[i] %> active<% end %>" id="<%=i+1%>">
             <!--Mask color-->
-            <h1><%=word.word%></h1>
-            <h2><%=word.pronounce%></h2>
-            <h2><%=word.meaning%></h2>
-            <%= image_tag word.image.url%>
-            <%= link_to  "Kiểm tra các từ đã xem", examination_course_path(current_word_id: word.id), class: "btn btn-success" %>
+            <h1><%=@learning_words[i].word%></h1>
+            <h2><%=@learning_words[i].pronounce%></h2>
+            <h2><%=@learning_words[i].meaning%></h2>
+            <%= image_tag @learning_words[i].image.url%>
+            
+            <%= link_to  "Kiểm tra các từ đã xem", examination_course_path(current_word_id: @learning_words[i].id), class: "btn btn-success" %>
           </div>
         <% end %>
       </div>
@@ -39,5 +39,39 @@
       <!--/.Controls-->
     </div>
   </div>
+  <div class="form-group row">
+    <div class="col-xs-3">
+      <div class="row">
+        <div class="col-xs-3">
+          <input class="form-control" id="ex1" type="text">
+        </div>
+        <div class="col-xs-1">
+          <span>/<%=@learning_words.length%></span>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-success" id="go">Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!--/.Carousel Wrapper-->
+<script>
+$('.carousel').carousel({
+    interval: 20000
+  })
+ $('.carousel').carousel('pause')
+ $('#carousel-example-2').on('slid.bs.carousel', function () {
+    $('#ex1').val($('.active').attr('id'))
+  })
+  $('#go').click(function () {
+    $('.active').removeClass('active')
+    $('#'+$('#ex1').val()).addClass('active')
+  })
+  $('#ext').change(function() {
+    if(parseInt($('#ex1').val()) > <%=@learning_words.length%>){
+      alert( "Ban nhap qua so tu lon nhat" );
+      $('#ex1').val('<%=@learning_words.length%>');
+     }
+  });
+ </script>

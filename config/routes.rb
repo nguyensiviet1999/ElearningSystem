@@ -14,14 +14,14 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   resources :users do
     member do
-      get :all_joined_courses
+      get :all_joined_courses, :following, :followers
     end
   end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :courses do
     member do
-      get :words_of_course, :learn, :examination, :check_answer
+      get :learn, :examination, :check_answer
     end
   end
   resources :categories, only: [:new, :create]
@@ -31,4 +31,5 @@ Rails.application.routes.draw do
       get :search_word
     end
   end
+  resources :relationships, only: [:create, :destroy]
 end

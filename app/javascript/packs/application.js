@@ -17,3 +17,4 @@ import "@fortawesome/fontawesome-free/js/all";
 // const imagePath = (name) => images(name, true)
 global.$ = jQuery
 //= require bootstrap-modal
+require("packs/sample")

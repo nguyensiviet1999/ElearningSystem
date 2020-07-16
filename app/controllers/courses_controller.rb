@@ -1,4 +1,6 @@
 class CoursesController < ApplicationController
+  before_action :logged_in_user, only: [:examination]
+
   def show
     @course = Course.find(params[:id])
     @learning_words = @course.words.paginate(page: params[:page])

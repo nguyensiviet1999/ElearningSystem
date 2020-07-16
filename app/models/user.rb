@@ -7,6 +7,16 @@ class User < ApplicationRecord
   has_many :courses, through: :results, source: :course
   has_many :user_learned_words, class_name: "UserLearnedWord", foreign_key: "user_id", dependent: :destroy
   has_many :learned_words, through: :user_learned_words, source: :word
+
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true, length: { maximum: 50 }
@@ -93,6 +103,35 @@ class User < ApplicationRecord
       learned_words_of_course.push(learned_word) if learned_word.course_id == course_id
     }
     return learned_words_of_course
+  end
+
+  def words_not_learned(course_id)
+    words_not_learned = []
+    if (course_id == 0)
+      Word.all.each do |word|
+        words_not_learned.push(word) if !learned_words.include?(word)
+      end
+    else
+      Course.find(course_id).words.each do |word|
+        words_not_learned.push(word) if !learned_words_of_course(course_id).include?(word)
+      end
+    end
+    return words_not_learned
+  end
+
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   private
