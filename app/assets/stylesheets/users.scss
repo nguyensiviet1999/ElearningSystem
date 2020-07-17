@@ -1,3 +1,29 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+/* Users index */
+.stats {
+    overflow: auto;
+   
+margin-top: 0; padding: 0; a{
+float: left;
+padding: 0 10px;
+border-left: 1px solid gray; color: gray;
+&:first-child {
+padding-left: 0;
+border: 0; }
+&:hover { text-decoration: none; color: blue;
+} }
+    strong {
+      display: block;
+} }
+.user_avatars {
+overflow: auto; margin-top: 10px; .gravatar {
+      margin: 1px 1px;
+    }
+a{
+padding: 0;
+} }
+.show_user{
+  height: 100%;
+}

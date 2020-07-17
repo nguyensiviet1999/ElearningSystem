@@ -46,6 +46,27 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def all_joined_courses
+    @title = "All Joined Courses"
+    @user = User.find(params[:id])
+    @courses = @user.courses.paginate(page: params[:page], per_page: 4)
+    render "static_pages/home"
+  end
+
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render "show_follow"
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render "show_follow"
+  end
+
   private
 
   def user_params

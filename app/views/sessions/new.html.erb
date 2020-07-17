@@ -1,7 +1,7 @@
 <%provide(:title, "Sign Up Page")%>
 <div class= "background_signup">
   <div class="row">
-    <div class="col-md-6 col-md-offset-3 signup_form">
+    <div class="col-md-6 offset-md-3 signup_form">
       <h1 style="color: white">Login</h1>
       <%=form_for(:session,url: login_path) do |f|%>
         <%=f.label :email%>
@@ -22,4 +22,3 @@
     </div>
   </div>
 </div>
->>>>>>> 77f6d1a54f542dcce84587cce899e589c2f0c562

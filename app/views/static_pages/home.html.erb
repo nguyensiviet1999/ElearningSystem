@@ -1,7 +1,100 @@
-<% provide(:title, "Home") %>
-<div class="row"><a class="btn btn-success" href = <%=new_course_path%>>Them khoa hoc</a></div>
-<div class="row"><a class="btn btn-success" href = <%=new_category_path%>>Them the loai</a></div>
+<%@title ||= "Home"%>
+<% provide(:title, @title) %>
+<% @user ||= current_user %>
 <div class="row">
-  <%= render 'shared/course' %>
+    <div class="col-sm">
+        
+    </div>
+    <div class="col-sm">
+       
+    </div>
+    <div class="col-sm">
+        
+    </div>
+    <div class="col-sm">
+        
+    </div>
+    <div class="col-sm">
+        
+    </div>
 </div>
-<%= will_paginate @courses %>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+            <% if logged_in? %>
+             <h5 class="card-title text-center ">Thong tin ca nhan</h5>
+             <hr>
+            <img class="card-img-top home_avatar" src="<%=@user.avatar.url%>" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><%=@user.name%></h5>
+            </div>
+             <div class="stats text-center">
+              <%= render 'shared/stats' %>
+            </div>
+            <% end %>
+            <div>
+                <div class="dropdown-divider"></div>
+                <a class="btn d-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                   Menu<i class="fa fa-caret-down" aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-divider"></div>
+                <div class="collapse " id="collapseExample" aria-labelledby="dropdownMenuButton">
+                    <a class="btn btn-primary d-block" href=<%=new_course_path%>>Them khoa hoc</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="btn btn-primary d-block" href=<%=new_category_path%>>Them the loai</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="btn btn-primary d-block" href=<%=new_word_path%>>Them cac word</a>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
+                    <% if @title == "Home" && logged_in?%>
+        <a class="btn btn-primary d-block" href=<%=all_joined_courses_user_path(@user)%>>Cac khoa da join</a>
+        <% else %>
+        <a class="btn btn-primary d-block" href=<%=root_url%>>Tat ca cac khoa hoc</a>
+        <% end %>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
+                    <a class="btn btn-primary d-block" href=<%=words_path%>>Danh sach cac Words</a>
+                    <div class="dropdown-divider"></div>
+                    
+                </div>
+            </div>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="flex-container">
+            <%= render 'shared/course' %>
+        </div>
+
+        <%= will_paginate @courses %>
+    </div>
+
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

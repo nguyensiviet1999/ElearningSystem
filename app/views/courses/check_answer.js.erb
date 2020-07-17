@@ -1,0 +1,7 @@
+<% if @correct_answer %>
+  $("#<%= @answer_at%>").parent().removeClass("btn-primary").addClass( "btn-success" );
+  alert( "Chuc mung ban da chon dung roi" );
+<% else %>
+  $("#<%= @answer_at%>").parent().removeClass("btn-primary").addClass( "btn-danger" );
+  alert( "Dang tiec ban da chon sai mat roi" );
+<% end %>

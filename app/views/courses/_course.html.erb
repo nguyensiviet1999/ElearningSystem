@@ -1,21 +1,30 @@
-<div class="col-md-6 course">
-    <h2> <%= link_to course.course_name, course %></a></h2>
-    
-    <% if current_user.joined_course?(course) %>
-    <%= link_to "Tiếp tục", course %>
-    <% else %>
-    <%= form_for(current_user.results.build) do |f| %>
-  <div><%= hidden_field_tag :course_id, course.id %></div>
-  <%= f.submit "Bắt đầu", class: "btn btn-success" %>
-<% end %>
+<div class="col-sm-4 course">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to course.course_name, course %></a></h5>
+      <% if logged_in? %>
+        <% if current_user.joined_course?(course) %>
+          <%= link_to "Tiếp tục", course , class: "btn btn-success" %>
+        <% else %>
+          <%= form_for(current_user.results.build) do |f| %>
+            <div>
+              <%= hidden_field_tag :course_id, course.id %>
+            </div>
+            <%= f.submit "Bắt đầu", class: "btn btn-success" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="course-image">
+    <%= link_to image_tag(course.image.url, alt: "Course logo",class:"card-img-top"), course %>
+    </div>
+    <div class="other">
+    <p>Tổng số từ: <%= course.words.count %></p>
+    <% if logged_in? %>
+      <p>Số từ đã học: <%=current_user.learned_words_of_course(course.id).count%>/<%= course.words.count %></p>
     <% end %>
-    <hr>
-    <%= link_to image_tag(course.image.url, alt: "Course logo"), course %>
-    <ul>
-      <li>
-        Tổng số từ: 500
-      </li>
-      <li>  Số từ đã học: 20/500</li>
-       <a href="#" class = "btn btn-success">Kiểm tra</a>
-    </ul>
+    <a href="#" class = "btn btn-success">Kiểm tra</a>
+    </div>
+    
   </div>
+</div>
