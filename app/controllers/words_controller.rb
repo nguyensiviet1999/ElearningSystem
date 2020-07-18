@@ -35,7 +35,7 @@ class WordsController < ApplicationController
           @words = @words.sort_by { |a| a[:word] }
         end
       end #het sap xep
-      @pagy_a, @words = pagy_array(@words, items: 4) 
+      @pagy_a, @words = pagy_array(@words, items: 4)
     else
       @words = Word.all
     end
@@ -57,12 +57,6 @@ class WordsController < ApplicationController
 
   def new
     @word = Word.new
-    @courses = Course.all
-    @options_course = Hash.new
-    @courses.each do |course|
-      @options_course[course.course_name] = course.id
-    end
-    @options_course
   end
 
   def create
@@ -109,6 +103,6 @@ class WordsController < ApplicationController
 
   #yêu cầu có :word trong params và chỉ cho phép nhận các param sau
   def word_params
-    params.require(:word).permit(:course_id, :word, :pronounce, :word_type, :meaning, :image)
+    params.require(:word).permit(:word, :pronounce, :word_type, :meaning, :image)
   end
 end

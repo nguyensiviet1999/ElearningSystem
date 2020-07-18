@@ -62,7 +62,10 @@
   <div class = "col-md-2">
     <%= link_to  "Start to learn",learn_course_path(course_id: @course.id) , class:"btn btn-success" %>
   </div>
+  <div class = "col-md-2">
+    <%= link_to  "Add Word", new_course_course_word_path(course_id: @course.id) , class:"btn btn-success" %>
+  </div>
 </div>
-<% if !@learning_words.nil? %>
+<% if @learning_words.present? %>
   <%= render @learning_words %>
 <% end %>

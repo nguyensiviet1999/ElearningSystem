@@ -2,25 +2,26 @@
   <div class= "words position-relative">
     <div class="row">
       <div class="col-md-4 english">
+      <a href=""></a>
         <h1>
-        <% if !word.course_words.first.nil? %>
-           <a href="<%=learn_course_path(id: word.course_words.first.course_id,word_id: word.id) %>">
-          <%= word.word%></a>
+        <% if !@learning_word.course_words.first.nil? %>
+           <a href="<%=learn_course_path(id: @learning_word.course_words.first.course_id,word_id: @learning_word.id) %>">
+          <%= @learning_word.word%></a>
         <% else %>
-          <b> <%= word.word%></b>
+          <b> <%= @learning_word.word%></b>
         <% end %>
          
         </h1>
       </div>
       <div class="col-md-4">
         <div>
-          <h2><%= word.pronounce%></h2>
+          <h2><%= @learning_word.pronounce%></h2>
         </div>
-        <div><b><%= word.meaning%></b></div>
+        <div><b><%= @learning_word.meaning%></b></div>
       </div>
       <div class="col-md-4">
         <div>
-          <%= image_tag word.image.url %>
+          <%= image_tag @learning_word.image.url %>
           <a href="#"><i class="fa fa-volume-down icon-play-audio"></i></a>
         </div>
       </div>

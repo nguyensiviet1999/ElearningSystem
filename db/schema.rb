@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_033020) do
+ActiveRecord::Schema.define(version: 2020_07_18_141951) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name_category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "course_words", force: :cascade do |t|
+    t.integer "course_id"
+    t.integer "word_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_course_words_on_course_id"
+    t.index ["word_id"], name: "index_course_words_on_word_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -75,7 +84,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_033020) do
   end
 
   create_table "words", force: :cascade do |t|
-    t.integer "course_id", null: false
     t.string "word"
     t.string "meaning"
     t.datetime "created_at", precision: 6, null: false
@@ -83,7 +91,6 @@ ActiveRecord::Schema.define(version: 2020_07_14_033020) do
     t.string "image"
     t.string "pronounce"
     t.string "word_type"
-    t.index ["course_id"], name: "index_words_on_course_id"
   end
 
   add_foreign_key "courses", "categories"
@@ -91,5 +98,4 @@ ActiveRecord::Schema.define(version: 2020_07_14_033020) do
   add_foreign_key "results", "users"
   add_foreign_key "user_learned_words", "users"
   add_foreign_key "user_learned_words", "words"
-  add_foreign_key "words", "courses"
 end

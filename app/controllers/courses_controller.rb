@@ -66,7 +66,7 @@ class CoursesController < ApplicationController
   def examination
     @current_word = Word.find(params[:current_word_id])
     @exam_words = []
-    all_words_of_course = @current_word.course.words
+    all_words_of_course = Course.find(params[:id]).words
     all_words_of_course.each { |word|
       answer = Array.new
       shuffle_all_words = Word.all.shuffle
