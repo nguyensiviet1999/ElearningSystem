@@ -32,7 +32,7 @@
     <div class="col-md-3 offset-md-5">
       <div class="row">
         <div class="col-md-3">
-          <input class="form-control" id="ex1" type="text">
+          <input class="form-control" id="ex1" type="text" value="">
         </div>
         <div class="col-md-1">
           <span>/<%=@learning_words.length%></span>
@@ -51,7 +51,8 @@ $('.carousel').carousel({
   })
  $('.carousel').carousel('pause')
  $('#carousel-example-2').on('slid.bs.carousel', function () {
-    $('#ex1').val($('.active').attr('id'))
+    $('#ex1').val($('.active')[1].id)
+    console.log($('.active')[1].id)
   })
   $('#go').click(function () {
     $('.active').removeClass('active')

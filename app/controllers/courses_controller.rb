@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @learning_words = @course.words.paginate(page: params[:page])
+    @learning_words = @course.words.paginate(page: params[:page], per_page: 5)
     puts @learning_words.inspect
   end
 
@@ -34,6 +34,21 @@ class CoursesController < ApplicationController
   end
 
   def delete
+  end
+
+  def destroy
+    if Course.find(params[:id]).destroy
+      @destroy_success = true
+      @id_course = params[:id]
+      respond_to do |format|
+        format.js
+      end
+    else
+      @destroy_success = false
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   def words_of_course

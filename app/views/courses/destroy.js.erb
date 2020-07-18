@@ -1,0 +1,9 @@
+<%if @destroy_success %>
+    alert("Bạn đã xóa thành công");
+    $('#exampleModal').modal('hide');
+    $("#"+<%=@id_course%>).parent().parent().parent().empty();
+    $("#"+<%=@id_course%>).parent().parent().parent().remove();
+<%else%>
+    alert("Bạn đã xóa thất bại");
+    $('#exampleModal').modal('hide');
+<%end%>

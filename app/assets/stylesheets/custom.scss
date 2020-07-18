@@ -48,3 +48,41 @@ body {
 .exambtn{
   margin-top: 10px;
 }
+.table-pagination {
+  display: flex;
+  justify-content: flex-end;
+
+
+  .pagination {
+    margin: 23px 15px;
+  }
+
+  .page-link {
+    align-items: center;
+    border: 0;
+    border-radius: 5px;
+    color: gray;
+    display: inline-flex;
+    height: 32px;
+    justify-content: center;
+    margin: 0 5px;
+    min-width: 32px;
+    padding: 0 10px;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &__previous,
+    &__next {
+      font-size: x-small;
+    }
+  }
+
+  .page-item.active .page-link {
+    background: blue;
+  }
+}
+.course{
+  margin-bottom: 20px;
+}

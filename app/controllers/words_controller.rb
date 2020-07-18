@@ -35,11 +35,11 @@ class WordsController < ApplicationController
           @words = @words.sort_by { |a| a[:word] }
         end
       end #het sap xep
-      puts @words.inspect
+      @pagy_a, @words = pagy_array(@words, items: 4) 
     else
-      @words = Word.all.paginate(page: params[:page], per_page: 10)
+      @words = Word.all
     end
-
+    @pagy_a, @words = pagy_array(@words, items: 4)
     # @words = @words.paginate(page: params[:page], per_page: 10)
 
     @courses = Course.all

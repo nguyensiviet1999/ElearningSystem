@@ -1,0 +1,6 @@
+require 'pagy/extras/bulma'
+require 'pagy/extras/array'
+require 'pagy/extras/bootstrap'
+require 'pagy/extras/navs'
+require 'pagy/extras/metadata'
+require 'pagy/extras/headers'
