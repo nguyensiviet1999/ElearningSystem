@@ -5,6 +5,7 @@ ruby "2.7.1"
 gem "bootstrap-sass"
 gem "bcrypt"
 gem "rufo"
+gem "ransack"
 #phan trang voi array
 gem "pagy"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
