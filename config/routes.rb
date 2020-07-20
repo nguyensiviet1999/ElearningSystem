@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  get "auth/google_oauth2/callback", to: "sessions#create_with_gmail"
+  get "auth/facebook/callback", to: "sessions#create_with_facebook"
+  get "auth/failure", to: redirect("/")
+
   resources :users do
     member do
       get :all_joined_courses, :following, :followers
@@ -23,11 +27,15 @@ Rails.application.routes.draw do
     member do
       get :learn, :examination, :check_answer
     end
-    resources :course_words, only: [:new, :create, :destroy]
+    resources :course_words do
+      collection do
+        get :delete
+      end
+    end
   end
   resources :categories, only: [:new, :create]
   resources :results, only: [:create, :destroy]
-  resources :course_words, only: [:new, :create, :destroy]
+  resources :course_words, only: [:new, :create, :delete, :destroy]
   resources :words do
     collection do #collection lay ra 1 tap words , va k can truyen id
       get :search_word

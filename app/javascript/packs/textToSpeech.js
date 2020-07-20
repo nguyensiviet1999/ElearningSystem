@@ -1,4 +1,4 @@
-  $('.speech').click(function(){
+$('.speech').click(function(){
     console.log($(this).data("text"));
     textToSpeech($(this).data("text"));
   })
@@ -13,5 +13,3 @@
        alert("Sorry, your browser doesn't support text to speech!");
      }
     }
-
-    

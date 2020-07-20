@@ -39,7 +39,7 @@
             <div class="col-md-4">
                 <div>
                     <%= image_tag word.image.url %>
-                    <a href="#"><i class="fa fa-volume-down icon-play-audio"></i></a>
+                    <button class = "speech btn" data-text="<%=word.word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
                 </div>
             </div>
         </div>
@@ -47,3 +47,5 @@
 </article>
 <% end %>
 <% end %>
+
+<%= javascript_pack_tag 'textToSpeech'%>

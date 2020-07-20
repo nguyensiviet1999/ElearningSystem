@@ -100,7 +100,8 @@ class User < ApplicationRecord
   def learned_words_of_course(course_id)
     learned_words_of_course = []
     learned_words.each { |learned_word|
-      learned_words_of_course.push(learned_word) if learned_word.course_words.course_id.include?(course_id)
+      puts learned_word.inspect
+      learned_words_of_course.push(learned_word) if learned_word.courses.include?(Course.find(course_id))
     }
     return learned_words_of_course
   end

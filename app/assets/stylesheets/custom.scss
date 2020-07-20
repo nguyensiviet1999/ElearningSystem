@@ -1,6 +1,6 @@
 // @import "bootstrap-sprockets";
 // @import "bootstrap";
-@import 'bootstrap/dist/css/bootstrap';
+@import "bootstrap/dist/css/bootstrap";
 /* universal */
 body {
   padding-top: 0;
@@ -11,7 +11,7 @@ body {
   flex-wrap: wrap;
   align-items: stretch;
 }
-.signup_form{
+.signup_form {
   background-attachment: fixed;
   background-image: url("background_elearning.png");
   background-position: center;
@@ -20,7 +20,7 @@ body {
   color: white;
   margin-top: 5%;
 }
-.course{
+.course {
   .card {
     height: 100%;
 
@@ -28,30 +28,33 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
 
-    .card-body{
+    .card-body {
     }
-    .course-image{
+    .course-image {
       flex: 2;
+      img {
+        height: 211px;
+        width: 211px;
+      }
     }
-    .other{
+    .other {
       flex: 1;
     }
   }
 }
-.home_avatar{
+.home_avatar {
   border-radius: 140px;
 }
-.stats{
+.stats {
   margin: auto;
   display: block;
 }
-.exambtn{
+.exambtn {
   margin-top: 10px;
 }
 .table-pagination {
   display: flex;
   justify-content: flex-end;
-
 
   .pagination {
     margin: 23px 15px;
@@ -83,6 +86,12 @@ body {
     background: blue;
   }
 }
-.course{
+.course {
   margin-bottom: 20px;
+}
+.users {
+    img {
+      height: 50px;
+      width: 50px;
+    }
 }

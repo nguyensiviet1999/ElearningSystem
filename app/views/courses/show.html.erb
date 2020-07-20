@@ -65,7 +65,11 @@
   <div class = "col-md-2">
     <%= link_to  "Add Word", new_course_course_word_path(course_id: @course.id) , class:"btn btn-success" %>
   </div>
+  <div class = "col-md-2">
+    <%= link_to  "Remove Word", delete_course_course_words_path(course_id: @course.id) , class:"btn btn-danger" %>
+  </div>
 </div>
 <% if @learning_words.present? %>
   <%= render @learning_words %>
 <% end %>
+<%= javascript_pack_tag 'textToSpeech'%>
