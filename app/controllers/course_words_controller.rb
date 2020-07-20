@@ -23,9 +23,23 @@ class CourseWordsController < ApplicationController
   def delete
     @course = Course.find(params[:course_id])
     @words = @course.words
-    puts @words
+    puts @words.inspect
   end
 
   def destroy
+    @course = Course.find(params[:course_id])
+    @word_id = params[:word_id]
+
+    if @course.course_words.find_by(word_id: @word_id).destroy
+      @des_success = true
+      respond_to do |format|
+        format.js
+      end
+    else
+      @des_success = false
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 end

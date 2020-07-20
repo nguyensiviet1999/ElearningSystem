@@ -78,7 +78,6 @@ class CoursesController < ApplicationController
       }
       answer.push(word.meaning)
       @exam_words.push({ :word => word, :answer => answer.shuffle! })
-      break if word == @current_word
     }
     @exam_words.shuffle!
     puts @exam_words

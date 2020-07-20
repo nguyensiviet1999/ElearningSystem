@@ -1,14 +1,14 @@
 <span>
 </span>
 <% @words.each do |word| %>
-  <% if !@course.words.include?(word) %>
-    <article id="add_word_to_course_<%=word.id%>">
+  <% if @course.words.include?(word) %>
+    <article id="delete_word_to_course_<%=word.id%>">
       <div class="words position-relative">
         <div class="row">
           <div class="col-md-4 english">
             <div class="row">
               <div class="col-md-4">
-                <%= form_for(@course.course_words.build,html:{ method: :delete,remote: true}) do |f| %>
+                <%= form_for(@course.course_words.find_by(word_id: word.id),html:{ method: :delete,remote: true}) do |f| %>
                   <div><%= hidden_field_tag :word_id, word.id %></div>
                   <div><%= hidden_field_tag :course_id, @course.id %></div>
                   <%= f.submit "Xoa", class: "btn btn-danger" %>
@@ -16,8 +16,8 @@
               </div>
               <div class="col-md-8">
                 <h1>
-                  <% if !word.course_words.first.nil? %>
-                    <a href="<%=learn_course_path(id: word.course_words.first.course_id,word_id: word.id) %>">
+                  <% if !@course.nil? %>
+                    <a href="<%=learn_course_path(id: @course.id,word_id: word.id) %>">
                       <%= word.word%></a>
                   <% else %>
                     <b> <%= word.word%></b>

@@ -67,7 +67,9 @@
     </div>
     <div class="col-md-8">
         <div class="flex-container">
-            <%= render 'shared/course' %>
+           <% if @courses.any? %>
+  <%= render @courses %>
+<% end %>
         </div>
 
         <%= will_paginate @courses %>
