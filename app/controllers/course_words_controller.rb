@@ -20,6 +20,11 @@ class CourseWordsController < ApplicationController
     end
   end
 
+  def delete
+    @course = Course.find(params[:course_id])
+    @words = @course.words
+  end
+
   def destroy
   end
 end

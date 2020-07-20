@@ -23,11 +23,15 @@ Rails.application.routes.draw do
     member do
       get :learn, :examination, :check_answer
     end
-    resources :course_words, only: [:new, :create, :destroy]
+    resources :course_words do
+      collection do
+        get :delete
+      end
+    end
   end
   resources :categories, only: [:new, :create]
   resources :results, only: [:create, :destroy]
-  resources :course_words, only: [:new, :create, :destroy]
+  resources :course_words, only: [:new, :create, :delete, :destroy]
   resources :words do
     collection do #collection lay ra 1 tap words , va k can truyen id
       get :search_word
