@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  get "auth/:provider/callback", to: "sessions#create_with_gmail"
+  get "auth/google_oauth2/callback", to: "sessions#create_with_gmail"
+  get "auth/facebook/callback", to: "sessions#create_with_facebook"
   get "auth/failure", to: redirect("/")
 
   resources :users do

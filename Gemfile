@@ -7,6 +7,7 @@ gem "bcrypt"
 gem "rufo"
 gem "ransack"
 gem "omniauth-google-oauth2"
+gem "omniauth-facebook"
 #phan trang voi array
 gem "pagy"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
