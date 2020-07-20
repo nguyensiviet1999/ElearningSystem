@@ -3,13 +3,12 @@
     <div class="row">
       <div class="col-md-4 english">
         <h1>
-        <% if !word.course_words.first.nil? %>
-           <a href="<%=learn_course_path(id: word.course_words.first.course_id,word_id: word.id) %>">
-          <%= word.word%></a>
-        <% else %>
-          <b> <%= word.word%></b>
-        <% end %>
-         
+          <% if !@course.nil? %>
+            <a href="<%=learn_course_path(id: @course.id,word_id: word.id) %>">
+              <%= word.word%></a>
+          <% else %>
+            <b> <%= word.word%></b>
+          <% end %>
         </h1>
       </div>
       <div class="col-md-4">
@@ -21,7 +20,7 @@
       <div class="col-md-4">
         <div>
           <%= image_tag word.image.url %>
-          <a href="#"><i class="fa fa-volume-down icon-play-audio"></i></a>
+          <button class = "speech btn" data-text="<%=word.word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
         </div>
       </div>
     </div>

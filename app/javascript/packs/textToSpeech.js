@@ -1,4 +1,4 @@
-  $('.speech').click(function(){
+$('.speech').click(function(){
     console.log($(this).data("text"));
     textToSpeech($(this).data("text"));
   })
