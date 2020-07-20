@@ -35,6 +35,9 @@ class WordsController < ApplicationController
           @words = @words.sort_by { |a| a[:word] }
         end
       end #het sap xep
+      if params[:search].present?
+        @words = Word.where("word LIKE '%#{params[:search]}%' OR meaning LIKE '%#{params[:search]}%'")
+      end
       @pagy_a, @words = pagy_array(@words, items: 4)
     else
       @words = Word.all

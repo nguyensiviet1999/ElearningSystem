@@ -7,6 +7,7 @@ $('.speech').click(function(){
       // Speech Synthesis supported 🎉
       var msg = new SpeechSynthesisUtterance();
       msg.text = text;
+      msg.lang = 'ja';
       window.speechSynthesis.speak(msg);
      }else{
        // Speech Synthesis Not Supported 😣
