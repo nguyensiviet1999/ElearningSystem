@@ -21,6 +21,27 @@ class SessionsController < ApplicationController
     end
   end
 
+  def create_with_gmail
+    response = request.env["omniauth.auth"]
+    if (User.find_by(email: response[:info][:email]))
+      flash[:success] = "dang nhap thanh cong bang email"
+      log_in User.find_by(email: response[:info][:email])
+      redirect_to root_url
+    else
+      random_password = User.new_token
+      name = response[:info][:email].split("@")[0]
+      user = User.new(name: name, email: response[:info][:email], avatar: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
+      if user.save
+        flash[:success] = "dang nhap thanh cong bang email"
+        log_in user
+        redirect_to root_url
+      else
+        flash[:danger] = "dang nhap khong thanh cong bang email"
+        redirect_to login_path
+      end
+    end
+  end
+
   def destroy
     log_out if logged_in?
     redirect_to root_url
