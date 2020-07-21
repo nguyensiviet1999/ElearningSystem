@@ -6,5 +6,4 @@ class Word < ApplicationRecord
   validates :pronounce, presence: true, length: { maximum: 255 }
   validates :word_type, presence: true, length: { maximum: 255 }
   mount_uploader :image, PictureUploader
-  validates :image, presence: true
 end

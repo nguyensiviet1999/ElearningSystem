@@ -18,7 +18,12 @@
                     <button class = "speech btn" data-text="<%=@learning_words[i].word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
                 </div>
               </div>
-            <%= image_tag @learning_words[i].image.url%>
+           
+            <% if @learning_words[i].image.url.present? %>
+               <%= image_tag @learning_words[i].image.url%>
+            <% else %>
+              <%= image_tag 'default_image.png' %>
+            <% end %>
             
             <%= link_to  "Kiểm tra", examination_course_path(current_word_id: @learning_words[i].id), class: "btn btn-success exambtn" %>
           </div>

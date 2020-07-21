@@ -98,20 +98,14 @@ class User < ApplicationRecord
   end
 
   def learned_words_of_course(course_id)
-    learned_words_of_course = []
-    learned_words.each { |learned_word|
-      puts learned_word.inspect
-      learned_words_of_course.push(learned_word) if learned_word.courses.include?(Course.find(course_id))
-    }
+    learned_words_of_course = Course.find(course_id).words && learned_words
     return learned_words_of_course
   end
 
   def words_not_learned(course_id)
     words_not_learned = []
     if (course_id == 0)
-      Word.all.each do |word|
-        words_not_learned.push(word) if !learned_words.include?(word)
-      end
+      words_not_learned = Word.where.not(id: learned_words.ids)
     else
       Course.find(course_id).words.each do |word|
         words_not_learned.push(word) if !learned_words_of_course(course_id).include?(word)

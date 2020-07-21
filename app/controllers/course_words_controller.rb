@@ -1,7 +1,8 @@
 class CourseWordsController < ApplicationController
   def new
     @course = Course.find(params[:course_id])
-    @words = Word.all
+    @words = Word.where.not(id: @course.words.ids)
+    @pagy_a, @words = pagy_array(@words, items: 4)
   end
 
   def create
@@ -23,7 +24,7 @@ class CourseWordsController < ApplicationController
   def delete
     @course = Course.find(params[:course_id])
     @words = @course.words
-    puts @words.inspect
+    @pagy_a, @words = pagy_array(@words, items: 4)
   end
 
   def destroy

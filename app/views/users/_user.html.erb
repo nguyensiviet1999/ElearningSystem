@@ -3,6 +3,7 @@
     <%= gravatar_for user, size: 50 %>
   <%else%>
     <%= image_tag user.avatar.url%>
+    
   <% end %>
   <%= link_to user.name, user %>
   <% if current_user.admin? && !current_user?(user) %>

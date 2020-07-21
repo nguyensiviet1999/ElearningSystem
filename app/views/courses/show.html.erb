@@ -69,7 +69,10 @@
     <%= link_to  "Remove Word", delete_course_course_words_path(course_id: @course.id) , class:"btn btn-danger" %>
   </div>
 </div>
-<% if @learning_words.present? %>
-  <%= render @learning_words %>
-<% end %>
+<div class="digg_pagination">
+  <% if @learning_words.present? %>
+    <%= render @learning_words %>
+    <%= will_paginate @learning_words %>
+  <% end %>
+</div>
 <%= javascript_pack_tag 'textToSpeech'%>

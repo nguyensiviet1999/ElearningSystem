@@ -44,15 +44,16 @@ class SessionsController < ApplicationController
 
   def create_with_facebook
     response = request.env["omniauth.auth"]
-    puts response
-    if (User.find_by(email: response[:info][:email]))
+    email = response[:extra][:raw_info][:id] + "@facebook.com"
+    if (User.find_by(email: email))
       flash[:success] = "dang nhap thanh cong bang FaceBook"
-      log_in User.find_by(email: response[:info][:email])
+      log_in User.find_by(email: email)
       redirect_to root_url
     else
       random_password = User.new_token
       name = response[:info][:name]
-      user = User.new(name: name, email: response[:info][:email], avatar: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
+      email = response[:extra][:raw_info][:id] + "@facebook.com"
+      user = User.new(name: name, email: email, avatar: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
       if user.save
         flash[:success] = "dang nhap thanh cong bang FaceBook"
         log_in user

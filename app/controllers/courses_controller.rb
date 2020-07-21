@@ -67,7 +67,10 @@ class CoursesController < ApplicationController
     @current_word = Word.find(params[:current_word_id])
     @exam_words = []
     all_words_of_course = Course.find(params[:id]).words
+    index = 0
+    index_current_word = 0
     all_words_of_course.each { |word|
+      index_current_word = index if word == @current_word
       answer = Array.new
       shuffle_all_words = Word.all.shuffle
       4.times { |i|
@@ -78,8 +81,11 @@ class CoursesController < ApplicationController
       }
       answer.push(word.meaning)
       @exam_words.push({ :word => word, :answer => answer.shuffle! })
+      index = index + 1
     }
-    @exam_words.shuffle!
+
+    @exam_words[0], @exam_words[index_current_word] = @exam_words[index_current_word], @exam_words[0]
+    @exam_words[1..(@exam_words.length - 1)].shuffle!
     puts @exam_words
   end
 

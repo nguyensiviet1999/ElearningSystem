@@ -21,11 +21,17 @@
 <hr>
 <div class="row">
     <div class="col-md-4">
+
         <div class="card" style="width: 18rem;">
             <% if logged_in? %>
              <h5 class="card-title text-center ">Thong tin ca nhan</h5>
              <hr>
-            <img class="card-img-top home_avatar" src="<%=@user.avatar.url%>" alt="Card image cap">
+             <% if @user.avatar.url.nil? %>
+                <%= image_tag 'default_image.png',class:"card-img-top home_avatar" %>
+             <% else %>
+                <img class="card-img-top home_avatar" src="<%=@user.avatar.url%>" alt="Card image cap">
+             <% end %>
+           
             <div class="card-body">
                 <h5 class="card-title"><%=@user.name%></h5>
             </div>
@@ -48,15 +54,14 @@
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-divider"></div>
                     <% if @title == "Home" && logged_in?%>
-        <a class="btn btn-primary d-block" href=<%=all_joined_courses_user_path(@user)%>>Cac khoa da join</a>
-        <% else %>
-        <a class="btn btn-primary d-block" href=<%=root_url%>>Tat ca cac khoa hoc</a>
-        <% end %>
+                    <a class="btn btn-primary d-block" href=<%=all_joined_courses_user_path(@user)%>>Cac khoa da join</a>
+                    <% else %>
+                    <a class="btn btn-primary d-block" href=<%=root_url%>>Tat ca cac khoa hoc</a>
+                    <% end %>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-divider"></div>
                     <a class="btn btn-primary d-block" href=<%=words_path%>>Danh sach cac Words</a>
                     <div class="dropdown-divider"></div>
-                    
                 </div>
             </div>
             <div class="card-body">
@@ -64,6 +69,7 @@
                 <a href="#" class="card-link">Another link</a>
             </div>
         </div>
+        <%=render 'ranking'%>
     </div>
     <div class="col-md-8">
         <div class="flex-container">

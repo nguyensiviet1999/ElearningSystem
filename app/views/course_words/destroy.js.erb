@@ -1,7 +1,7 @@
 <%if @des_success%>
   $('#delete_word_to_course_<%=@word_id%>').empty()
   $('#delete_word_to_course_<%=@word_id%>').remove()
-  $('span').html("<%=escape_javascript(render('course_words/success')) %>");
+  $('.alert').html("<%=escape_javascript(render('course_words/success')) %>");
 <%else%>
-  $('span').html("<%=escape_javascript(render('course_words/fail')) %>");
+  $('.alert').html("<%=escape_javascript(render('course_words/fail')) %>");
 <%end%>

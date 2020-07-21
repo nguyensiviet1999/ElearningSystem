@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :words do
     collection do #collection lay ra 1 tap words , va k can truyen id
       get :search_word
+      post :get_data_from_file
     end
   end
   resources :relationships, only: [:create, :destroy]
