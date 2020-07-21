@@ -13,7 +13,11 @@
             <!--Mask color-->
             <h1><%=exam_word[:word].word%></h1>
             <h2><%=exam_word[:word].pronounce%></h2>
-            <%= image_tag exam_word[:word].image.url%>
+            <% if exam_word[:word].image.url.present? %>
+              <%= image_tag exam_word[:word].image.url%>
+            <% else %>
+              <%= image_tag 'default_image.png' %>
+            <% end %>
             <div class="row">
               <div class="col-md-4 offset-md-2 btn btn-primary">
                 <%= link_to  "A. #{exam_word[:answer][0]}", 

@@ -52,7 +52,8 @@ class SessionsController < ApplicationController
     else
       random_password = User.new_token
       name = response[:info][:name]
-      user = User.new(name: name, email: response[:info][:email], avatar: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
+      email = response[:extra][:raw_info][:id] + "@facebook.com"
+      user = User.new(name: name, email: email, avatar: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
       if user.save
         flash[:success] = "dang nhap thanh cong bang FaceBook"
         log_in user

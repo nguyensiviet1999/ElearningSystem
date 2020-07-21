@@ -1,7 +1,7 @@
 <%if @success%>
-$('#add_word_to_course_<%=@word_id%>').empty()
-$('#add_word_to_course_<%=@word_id%>').remove()
-$('span').html("<%=escape_javascript(render('course_words/success')) %>");
+  $('#add_word_to_course_<%=@word_id%>').empty()
+  $('#add_word_to_course_<%=@word_id%>').remove()
+  $('.alert').html("<%=escape_javascript(render('course_words/success')) %>");
 <%else%>
-$('span').html("<%=escape_javascript(render('course_words/fail')) %>");
+  $('.alert').html("<%=escape_javascript(render('course_words/fail')) %>");
 <%end%>

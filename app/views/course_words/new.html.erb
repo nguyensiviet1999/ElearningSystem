@@ -1,5 +1,44 @@
-<span>
+<span class="alert">
 </span>
+ <% link = pagy_link_proc(@pagy_a) %>
+ <nav aria-label="pager" class="table-pagination" role="navigation">
+    <ul class="pagination">
+      <% if @pagy_a.prev %>
+        <li class="page-item">
+          <%== link.call(@pagy_a.prev, '<span class="icon-ic-arrow-left page-link__previous" aria-hidden="true"><i class="fa fa-arrow-left"></i></span>', 'aria-label="previous" class="page-link"') %>
+        </li>
+      <% else %>
+        <li class="page-item disabled">
+          <%==link.call(1, '<span class="icon-ic-arrow-left page-link__previous" aria-hidden="true"></span>', 'class="page-link"') %>
+        </li>
+      <% end %>
+      <% @pagy_a.series.each do |item| %>
+        <% if item.is_a?(Integer) %>
+          <li class="page-item">
+            <%== link.call(item, item, 'class=page-link') %>
+          </li>
+        <% elsif item.is_a?(String) %>
+          <li class="page-item active">
+            <%= link_to(item, "javascript:void(0)", class: "page-link") %>
+          </li>
+        <% elsif item == :gap %>
+          <li class="page-item disabled">
+            <%== link_to("...", "javascript:void(0)", class: "page-link") %>
+          </li>
+        <% end %>
+      <% end %>
+      <% if @pagy_a.next %>
+        <li class="page-item">
+          <%== link.call(@pagy_a.next, '<span class="icon-ic-arrow-right page-link__next" aria-hidden="true"><i class="fa fa-arrow-right"></i></span>', 'aria-label="next" class="page-link"') %>
+        </li>
+      <% else %>
+        <li class="page-item disabled">
+          <%== link.call(@pagy_a.last, '<span class="icon-ic-arrow-right page-link__next" aria-hidden="true"></span>', 'class="page-link"') %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+
 <% @words.each do |word| %>
 <% if !@course.words.include?(word) %>
     
@@ -38,7 +77,11 @@
             </div>
             <div class="col-md-4">
                 <div>
+                <% if word.image.url.present? %>
                     <%= image_tag word.image.url %>
+                <% else %>
+                    <%= image_tag 'default_image.png' %>
+                <% end %>
                     <button class = "speech btn" data-text="<%=word.word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
                 </div>
             </div>

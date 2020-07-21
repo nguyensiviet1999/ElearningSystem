@@ -19,7 +19,11 @@
       </div>
       <div class="col-md-4">
         <div>
-          <%= image_tag word.image.url %>
+          <% if word.image.url.present? %>
+            <%= image_tag word.image.url %>
+          <% else %>
+            <%= image_tag 'default_image.png' %>
+          <% end %>
           <button class = "speech btn" data-text="<%=word.word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
         </div>
       </div>
