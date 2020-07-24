@@ -5,6 +5,7 @@
   <!--Slides-->
   <div class="row">
     <div class="col-md-6 offset-md-3">
+      <div>Time<span id="lbltxt"></span></div>
       <div>So cau dung:<span class="true_answer">0</span>|So cau sai: <span class="false_answer">0</span></div>
       <div class="carousel-inner" role="listbox">
         <% @exam_words.each do |exam_word| %>
@@ -21,20 +22,20 @@
             <div class="row">
               <div class="col-md-4 offset-md-2 btn btn-primary">
                 <%= link_to  "A. #{exam_word[:answer][0]}", 
-                check_answer_course_path(answer: exam_word[:answer][0],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].word}_A") ,
-                remote: true, class: "btn answer",id: "#{exam_word[:word].word}_A"%>
+                check_answer_course_path(answer: exam_word[:answer][0],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].id}_A") ,
+                remote: true, class: "btn answer",id: "#{exam_word[:word].id}_A"%>
               </div>
               <div class="col-md-4 btn .offset-md-2 btn-primary">
-                <%= link_to  "B. #{exam_word[:answer][1]}", check_answer_course_path(answer: exam_word[:answer][1],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].word}_B") ,
-                remote: true,id: "#{exam_word[:word].word}_B", class: "btn answer"%>
+                <%= link_to  "B. #{exam_word[:answer][1]}", check_answer_course_path(answer: exam_word[:answer][1],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].id}_B") ,
+                remote: true,id: "#{exam_word[:word].id}_B", class: "btn answer"%>
               </div>
               <div class="col-md-4 offset-md-2 btn btn-primary">
-                <%= link_to  "C. #{exam_word[:answer][2]}", check_answer_course_path(answer: exam_word[:answer][2],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].word}_C"),
-                remote: true,id: "#{exam_word[:word].word}_C", class: "btn answer"%>
+                <%= link_to  "C. #{exam_word[:answer][2]}", check_answer_course_path(answer: exam_word[:answer][2],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].id}_C"),
+                remote: true,id: "#{exam_word[:word].id}_C", class: "btn answer"%>
               </div>
               <div class="col-md-4 .offset-md-2 btn btn-primary">
-                <%= link_to  "D. #{exam_word[:answer][3]}", check_answer_course_path(answer: exam_word[:answer][3],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].word}_D"),
-                remote: true,id: "#{exam_word[:word].word}_D", class: "btn answer"%>
+                <%= link_to  "D. #{exam_word[:answer][3]}", check_answer_course_path(answer: exam_word[:answer][3],word_id: exam_word[:word].id,answer_at:"#{exam_word[:word].id}_D"),
+                remote: true,id: "#{exam_word[:word].id}_D", class: "btn answer"%>
               </div>
             </div>
           </div>
@@ -52,15 +53,32 @@
   </div>
 </div>
 <!--/.Carousel Wrapper-->
+<script type="text/javascript">
+  var count=0;
+  function dotnetstock() {
+  // Call function with 1000 milliseconds gap
+  
+  setInterval(starttimer, 1000);
+  }
+  function starttimer() {
+  count += 1;
+  if(count==30){
+    $('.carousel').carousel('next');
+    count = 0;
+  }
+  document.getElementById("lbltxt").innerHTML = "Your Time Starts: "+count;
+  }
+  $( document ).ready(function() {
+    dotnetstock();
+  });
+</script>
 <script>
-  $('.carousel').carousel({
-    interval: 20000
-  })
-  $('.carousel').carousel('pause')
   $('#carousel-example-2').on('slid.bs.carousel', function () {
+    $('.carousel').carousel('pause');
     $('.answer').parent().removeClass("btn-danger").addClass( "btn-primary" );
     $('.answer').parent().removeClass("btn-success").addClass( "btn-primary" );
-  
+    clearInterval();
+    count = 0;
   })
 </script>
 <%= javascript_pack_tag 'textToSpeech'%>

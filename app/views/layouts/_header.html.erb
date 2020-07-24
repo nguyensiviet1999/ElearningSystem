@@ -35,9 +35,10 @@
         </li>
       <%end%>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <%= search_form_for @q do |f| %>
+      <%= f.label :word_or_meaning_cont %>
+      <%= f.search_field :word_or_meaning_cont %>
+      <%= f.submit %>
+    <% end %>
   </div>
 </nav>

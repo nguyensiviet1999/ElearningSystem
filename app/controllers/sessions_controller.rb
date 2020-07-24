@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
 
   def create_with_gmail
     response = request.env["omniauth.auth"]
+    puts response.inspect
     if (User.find_by(email: response[:info][:email]))
       flash[:success] = "dang nhap thanh cong bang email"
       log_in User.find_by(email: response[:info][:email])
@@ -30,7 +31,7 @@ class SessionsController < ApplicationController
     else
       random_password = User.new_token
       name = response[:info][:email].split("@")[0]
-      user = User.new(name: name, email: response[:info][:email], avatar: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
+      user = User.new(name: name, email: response[:info][:email], remote_avatar_url: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
       if user.save
         flash[:success] = "dang nhap thanh cong bang email"
         log_in user
@@ -45,6 +46,7 @@ class SessionsController < ApplicationController
   def create_with_facebook
     response = request.env["omniauth.auth"]
     email = response[:extra][:raw_info][:id] + "@facebook.com"
+    puts response
     if (User.find_by(email: email))
       flash[:success] = "dang nhap thanh cong bang FaceBook"
       log_in User.find_by(email: email)
@@ -53,7 +55,7 @@ class SessionsController < ApplicationController
       random_password = User.new_token
       name = response[:info][:name]
       email = response[:extra][:raw_info][:id] + "@facebook.com"
-      user = User.new(name: name, email: email, avatar: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
+      user = User.new(name: name, email: email, remote_avatar_url: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
       if user.save
         flash[:success] = "dang nhap thanh cong bang FaceBook"
         log_in user

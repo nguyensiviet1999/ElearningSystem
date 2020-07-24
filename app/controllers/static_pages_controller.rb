@@ -11,7 +11,7 @@ class StaticPagesController < ApplicationController
 
     @current_user_data = { :user => current_user, :learned_words_count => current_user.learned_words.count } if logged_in?
     @ranking_user = @ranking_user.sort_by { |a| a[:learned_words_count] }.reverse
-    puts @ranking_user.inspect
+    # puts @ranking_user.inspect
   end
 
   def help

@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @learning_words = @course.words.paginate(page: params[:page], per_page: 5)
-    puts @learning_words.inspect
+    # puts @learning_words.inspect
   end
 
   def new
@@ -60,7 +60,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @current_word = params[:word_id].blank? ? @course.words.first : Word.find(params[:word_id])
     @learning_words = @course.words
-    puts @current_word.inspect
+    # puts @current_word.inspect
   end
 
   def examination
@@ -72,7 +72,7 @@ class CoursesController < ApplicationController
     all_words_of_course.each { |word|
       index_current_word = index if word == @current_word
       answer = Array.new
-      shuffle_all_words = Word.all.shuffle
+      shuffle_all_words = Word.limit(20).shuffle
       4.times { |i|
         if (shuffle_all_words[i].meaning != word.meaning)
           answer.push(shuffle_all_words[i].meaning)
@@ -86,7 +86,7 @@ class CoursesController < ApplicationController
 
     @exam_words[0], @exam_words[index_current_word] = @exam_words[index_current_word], @exam_words[0]
     @exam_words[1..(@exam_words.length - 1)].shuffle!
-    puts @exam_words
+    # puts @exam_words
   end
 
   def new_release
@@ -100,10 +100,12 @@ class CoursesController < ApplicationController
     answer = params[:answer]
     word = Word.find(params[:word_id])
     @answer_at = params[:answer_at]
+    puts @answer_at
     @correct_answer = true
     if (answer == word.meaning)
       @correct_answer = true
       respond_to do |format|
+        format.html
         format.js
       end
       if !current_user.learned_words.include?(word)
@@ -112,6 +114,7 @@ class CoursesController < ApplicationController
     else
       @correct_answer = false
       respond_to do |format|
+        format.html
         format.js
       end
       if current_user.learned_words.include?(word)

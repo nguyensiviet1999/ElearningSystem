@@ -2,6 +2,12 @@ class WordsController < ApplicationController
   before_action :logged_in_user, only: [:index]
 
   def index
+    if params[:commit].present? && params[:commit] == "Search"
+      puts "params q in here"
+      puts params[:q].inspect
+      @q = Word.ransack(params[:q])
+      @word = @q.result
+    end
     if (params[:commit].present? && params[:commit] == "Tim kiem")
       #sap xep
       search = params[:search] if params[:search].present?
@@ -17,7 +23,7 @@ class WordsController < ApplicationController
             @words = current_user.learned_words
           else
             @words = current_user.words_not_learned(params[:course_id].to_i)
-            puts @words.inspect
+            # puts @words.inspect
           end
         end
       else
@@ -140,7 +146,7 @@ class WordsController < ApplicationController
       # end
       # break if !data_word_list.blank?
     }
-    puts data_word_list
+    # puts data_word_list
     result = Word.insert_all(data_word_list)
     flash[:success] = "Successfully created..."
   end
