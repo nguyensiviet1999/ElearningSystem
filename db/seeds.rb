@@ -9,7 +9,7 @@ User.create!(name: "Example User",
              email: "example@railstutorial.org",
              password: "foobar", password_confirmation: "foobar",
              admin: true,
-             activated: true, 
+             activated: true,
              activated_at: Time.zone.now)
 10.times do |n|
   name = Faker::Name.name
@@ -23,3 +23,8 @@ User.create!(name: "Example User",
                activated_at: Time.zone.now)
 end
 
+users = User.all
+word = Word.first
+users[2..9].each { |user|
+  user.learned_word(word)
+}

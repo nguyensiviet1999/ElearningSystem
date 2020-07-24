@@ -12,6 +12,10 @@
     <h6 class="text-info">9.<%=@ranking_user[8][:user].name%>(<%=@ranking_user[8][:learned_words_count]%>)</h6>
     <h6 class="text-info">10.<%=@ranking_user[9][:user].name%>(<%=@ranking_user[9][:learned_words_count]%>)</h6>
     ...
-    <h6 class="text-dark">10</h6>
+    <% if logged_in? && @ranking_user.index(@current_user_data) >= 10 %>
+      <h6 class="text-dark"><%=@ranking_user.index(@current_user_data)+1%>.<%=@current_user_data[:user].name%>(<%=@current_user_data[:learned_words_count]%>)</h6>
+      
+    <% end %>
+    
   </div>
 </div>

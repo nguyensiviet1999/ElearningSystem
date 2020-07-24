@@ -58,7 +58,7 @@
                     <div class="col-md-8">
                         <h1>
                             <% if !word.course_words.first.nil? %>
-                            <a href="<%=learn_course_path(id: word.course_words.first.course_i d,word_id: word.id) %>">
+                            <a href="<%=learn_course_path(id: word.course_words.first.course_id,word_id: word.id) %>">
                                 <%= word.word%></a>
                             <% else %>
                             <b> <%= word.word%></b>
