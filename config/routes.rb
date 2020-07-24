@@ -43,4 +43,6 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: [:create, :destroy]
+  resources :user_learned_words, only: [:create, :destroy]
+
 end

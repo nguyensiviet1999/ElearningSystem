@@ -4,16 +4,30 @@
   <!--/.Indicators-->
   <!--Slides-->
   <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div>Time<span id="lbltxt"></span></div>
+    <div class="col-md-8 offset-md-2">
+      <h1>Time</h1>
+      <div id="myProgress">
+        <div id="myBar"></div>
+      </div>
+      <br>
       <div>So cau dung:<span class="true_answer">0</span>|So cau sai: <span class="false_answer">0</span></div>
       <div class="carousel-inner" role="listbox">
         <% @exam_words.each do |exam_word| %>
-          <div class="carousel-item 
+          <div id="<%=exam_word[:word].id%>" class="carousel-item 
             <% if @current_word == exam_word[:word] %> active<% end %>" >
             <!--Mask color-->
-            <h1><%=exam_word[:word].word%></h1>
-            <h2><%=exam_word[:word].pronounce%></h2>
+            <div class="row">
+              <div class="col-md-8">
+                <h1><%=exam_word[:word].word%></h1>
+                <h2><%=exam_word[:word].pronounce%></h2>
+              </div>
+              <div class="col-md-2 .offset-md-2">
+                <br>
+                <%= link_to   "Chưa thuộc", user_learned_word_path(exam_word[:word].id),class:"unlearned",id: exam_word[:word].id.to_s+"_unlearned", method: :delete, remote: true , hidden: true%>
+                <br>
+                <button class = "speech btn" data-text="<%=exam_word[:word].word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
+              </div>
+            </div>
             <% if exam_word[:word].image.url.present? %>
               <%= image_tag exam_word[:word].image.url%>
             <% else %>
@@ -54,31 +68,43 @@
 </div>
 <!--/.Carousel Wrapper-->
 <script type="text/javascript">
-  var count=0;
-  function dotnetstock() {
-  // Call function with 1000 milliseconds gap
-  
-  setInterval(starttimer, 1000);
-  }
-  function starttimer() {
-  count += 1;
-  if(count==30){
-    $('.carousel').carousel('next');
-    count = 0;
-  }
-  document.getElementById("lbltxt").innerHTML = "Your Time Starts: "+count;
-  }
   $( document ).ready(function() {
-    dotnetstock();
+    $('.carousel').carousel('pause');
+    var elem = document.getElementById("myBar");
+    var width = 0;
+    var id = setInterval(frame, 10);
+    
+    function frame() {
+
+        
+      if (width == 15000) {
+        width = 0;
+        console.log(typeof $('.unlearned'))
+        if(typeof $('div.active').attr('id') == "undefined"){
+          clearInterval(id);
+        }
+        unlearn = $('div.active').attr('id')+'_unlearned';
+        document.getElementById(unlearn).click();
+        $('.false_answer').html(parseInt($('.false_answer').html())+1);
+        $('.carousel').carousel('next');
+      } else {
+        width += 10;
+        elem.style.width = width/150 + '%';
+      }
+    }
+    $('#carousel-example-2').on('slid.bs.carousel', function () {
+      $('.carousel').carousel('pause');
+      $('.answer').parent().removeClass("btn-danger").addClass( "btn-primary" );
+      $('.answer').parent().removeClass("btn-success").addClass( "btn-primary" );
+      width = 0
+      console.log(width)
+    })
   });
 </script>
 <script>
-  $('#carousel-example-2').on('slid.bs.carousel', function () {
-    $('.carousel').carousel('pause');
-    $('.answer').parent().removeClass("btn-danger").addClass( "btn-primary" );
-    $('.answer').parent().removeClass("btn-success").addClass( "btn-primary" );
-    clearInterval();
-    count = 0;
-  })
+  $('.carousel').carousel('pause');
+  $('.carousel').carousel({
+  interval: false,
+});
 </script>
 <%= javascript_pack_tag 'textToSpeech'%>

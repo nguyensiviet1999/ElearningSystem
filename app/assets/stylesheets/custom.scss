@@ -155,3 +155,16 @@ body {
 *:first-child + html .digg_pagination {
   overflow: hidden;
 }
+#myProgress {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  background-color: #ddd;
+}
+
+#myBar {
+  background-color: #4CAF50;
+  width: 0px;
+  height: 30px;
+  position: absolute;
+}

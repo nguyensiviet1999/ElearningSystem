@@ -2,12 +2,6 @@ class WordsController < ApplicationController
   before_action :logged_in_user, only: [:index]
 
   def index
-    if params[:commit].present? && params[:commit] == "Search"
-      puts "params q in here"
-      puts params[:q].inspect
-      @q = Word.ransack(params[:q])
-      @word = @q.result
-    end
     if (params[:commit].present? && params[:commit] == "Tim kiem")
       #sap xep
       search = params[:search] if params[:search].present?
@@ -46,6 +40,12 @@ class WordsController < ApplicationController
       end
     else
       @words = Word.all
+    end
+    if params[:commit].present? && params[:commit] == "Search"
+      puts "params q in here"
+      puts params[:q].inspect
+      @q = Word.ransack(params[:q])
+      @words = @q.result
     end
     @pagy_a, @words = pagy_array(@words, items: 10)
     # @words = @words.paginate(page: params[:page], per_page: 10)
