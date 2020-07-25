@@ -6,7 +6,7 @@
 
         <div class="card" style="width: 18rem;">
             <% if logged_in? %>
-             <h5 class="card-title text-center ">Thong tin ca nhan</h5>
+             <h5 class="card-title text-center ">Personal information</h5>
              <hr>
              <% if @user.avatar.url.nil? %>
                 <%= image_tag 'default_image.png',class:"card-img-top home_avatar" %>
@@ -28,30 +28,31 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <div class="collapse " id="collapseExample" aria-labelledby="dropdownMenuButton">
-                    <a class="btn btn-primary d-block" href=<%=new_course_path%>>Them khoa hoc</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="btn btn-primary d-block" href=<%=new_category_path%>>Them the loai</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="btn btn-primary d-block" href=<%=new_word_path%>>Them cac word</a>
-                    <div class="dropdown-divider"></div>
-                    <div class="dropdown-divider"></div>
-                    <% if @title == "Home" && logged_in?%>
-                    <a class="btn btn-primary d-block" href=<%=all_joined_courses_user_path(@user)%>>Cac khoa da join</a>
+                    <% if logged_in?%>
+                        <% if current_user.admin? %>
+                            <a class="btn btn-primary d-block" href=<%=new_course_path%>>Add Course</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="btn btn-primary d-block" href=<%=new_category_path%>>Add Category</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="btn btn-primary d-block" href=<%=new_word_path%>>Add Word</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>
+                        <% end %>
+                    <a class="btn btn-primary d-block" href=<%=all_joined_courses_user_path(@user)%>>Joined Courses</a>
                     <% else %>
-                    <a class="btn btn-primary d-block" href=<%=root_url%>>Tat ca cac khoa hoc</a>
+                    <a class="btn btn-primary d-block" href=<%=root_url%>>All Courses</a>
                     <% end %>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-divider"></div>
-                    <a class="btn btn-primary d-block" href=<%=words_path%>>Danh sach cac Words</a>
+                    <a class="btn btn-primary d-block" href=<%=words_path%>>Words List</a>
                     <div class="dropdown-divider"></div>
                 </div>
             </div>
             <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                
             </div>
         </div>
-        <%=render 'ranking'%>
+        <%=render 'static_pages/ranking'%>
     </div>
     <div class="col-md-8">
         <div class="flex-container">

@@ -1,21 +1,23 @@
 <%= form_tag words_path, :method => "get" do %>
   <div class="row">
     <div class="col-md-2">
-      <%= label_tag :course_id, "Khoa hoc" %>
+      <%= label_tag :course_id, "for Course" %>
       <%= select_tag(:course_id,options_for_select(@options_course), class:"form-control" ) %>
     </div>
     <div class="col-md-2">
-      <%= label_tag :order, "Thu tu sap xep" %>
+      <%= label_tag :order, "Order" %>
       <%= select_tag(:order, options_for_select([['A-Z','asc'],['Z-A','desc']]), class:"form-control", ) %>
     </div>
     <div class="col-md-3">
-      <%= label_tag :learning_status, "Tinh trang hoc" %>
+      <%= label_tag :learning_status, "Learning Status" %>
       <%= select_tag(:learning_status, options_for_select([['Da hoc',1],['Chua hoc',0]]), class:"form-control",include_blank: true ) %>
     </div>
     <div class="col-md-2">
+     <%= label_tag :search %>
       <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
     </div>
     <div class="col-md-2">
+    <%= label_tag %>
       <%= submit_tag "Tim kiem",class:"form-control btn btn-success"%>
     </div>
   </div>

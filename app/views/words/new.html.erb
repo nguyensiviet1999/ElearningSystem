@@ -1,39 +1,39 @@
 <div class="row">
   <div class = "col-md-8 offset-md-2">
-    <h1>Them tu moi</h2>
+    <h1>Add new word</h2>
     <%= form_for @word do |f| %>
       <div class="row">
         <div class="col-md-6">
-          <%= f.label :word, "Nhap tu" %>
+          <%= f.label :word, "word" %>
           <%= f.text_field :word,class:"form-control", placeholder: "abc"%>
         </div>
         <div class="col-md-6">
-          <%= f.label :pronounce, "Nhap phat am" %>
+          <%= f.label :pronounce, "pronounce" %>
           <%= f.text_field :pronounce,class:"form-control", placeholder: "abc"%>
         </div>
         <div class="col-md-6">
-          <%= f.label :word_type, "Nhap loai tu" %>
+          <%= f.label :word_type, "word type" %>
           <%= f.text_field :word_type,class:"form-control", placeholder: "abc"%>
         </div>
         <div class="col-md-6">
-          <%= f.label :meaning, "Nhap nghia tuong ung" %>
+          <%= f.label :meaning, "meaning" %>
           <%= f.text_field :meaning,class:"form-control", placeholder: "abc"%>
         </div>
         <br>
         <div class="col-md-6">
-          <%= f.label :image, "Chon hinh anh" %>
+          <%= f.label :image, "image" %>
           <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
         </div>
       </div>
-      <%= f.submit "Them tu",class:"form-control btn btn-success"%>
+      <%= f.submit "Add word",class:"form-control btn btn-success"%>
     <% end %>
   </div>
 </div>
 <a class="btn d-block" type="button" data-toggle="collapse" data-target="#collapseDataWord" aria-expanded="false" aria-controls="collapseDataWord">
-  Menu<i class="fa fa-caret-down" aria-hidden="true"></i>
+  Add new words by file<i class="fa fa-caret-down" aria-hidden="true"></i>
 </a>
 <div class="collapse offset-md-2 " id="collapseDataWord" aria-labelledby="dropdownMenuButton">
-  <h2>Dinh dang file</h2>
+  <h2>File format</h2>
   <p>
     @word /pronounce/
     <br>

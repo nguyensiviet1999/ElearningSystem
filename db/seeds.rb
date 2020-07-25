@@ -23,6 +23,11 @@ User.create!(name: "Example User",
                activated_at: Time.zone.now)
 end
 
+Word.create!(word: "test",
+             meaning: "Kiểm tra",
+             pronounce: "/test/",
+             word_type: "danh từ")
+
 users = User.all
 word = Word.first
 users[2..9].each { |user|

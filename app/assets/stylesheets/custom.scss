@@ -13,7 +13,7 @@ body {
 }
 .signup_form {
   background-attachment: fixed;
-  background-image: url("background_elearning.png");
+  background-image: url("https://i.pinimg.com/originals/0b/a3/d6/0ba3d60362c7e6d256cfc1f37156bad9.jpg");
   background-position: center;
   background-size: cover;
   border-radius: 20px;
@@ -167,4 +167,16 @@ body {
   width: 0px;
   height: 30px;
   position: absolute;
+}
+.edit_user{
+  img{
+    height: 50%;
+    width: 50%;
+  }
+}
+.user_info{
+  img{
+    height: 50%;
+    width: 50%;
+  }
 }

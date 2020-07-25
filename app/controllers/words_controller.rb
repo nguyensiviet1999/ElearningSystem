@@ -120,16 +120,17 @@ class WordsController < ApplicationController
       if line[0] == "@"
         data_word = Hash.new
         data_word[:word] = line.split("/")[0].delete("@")
-        if line.split("/")[1].nil?
-          data_word[:pronounce] = ""
-        else
+        if !line.split("/")[1].nil?
           data_word[:pronounce] = "/" + line.split("/")[1] + "/"
         end
       elsif line[0] == "*" && data_word[:word_type].nil?
         data_word[:word_type] = line.split("*")[1]
       elsif line[0] == "-" && data_word[:meaning].nil?
+        data_word[:word] ||= index
         data_word[:word_type] ||= "danh tu"
         data_word[:meaning] = line.split("-")[1]
+        data_word[:meaning] ||= "none"
+        data_word[:pronounce] ||= "none"
         data_word[:created_at] = Time.zone.now
         data_word[:updated_at] = Time.zone.now
         data_word[:image] = ""

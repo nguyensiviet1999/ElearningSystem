@@ -15,7 +15,7 @@
     <%= render 'follow_form' if logged_in? %>
   </aside>
   <div class="col-md-8">
-    <h2>Cac khoa hoc da follow</h2>
+    <h2>Joined Courses</h2>
     
     <% if current_user.following?(@user) || current_user== @user%>
       <div class="row">

@@ -1,6 +1,6 @@
 <div class="row">
   <div class= "col-md-6 offset-md-3">
-    <h2>Them moi khoa hoc</h2>
+    <h2>Add new course</h2>
     <%=form_for(@course , html: {multipart:true}) do |f|%>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.label "Name of Course" %>
@@ -10,7 +10,7 @@
       <span class="picture">
         <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
       </span>
-      <%= f.submit "Them moi", class: "btn btn-primary" %>
+      <%= f.submit "Add", class: "btn btn-primary form-control" %>
     <%end%>
   </div>
 </div>

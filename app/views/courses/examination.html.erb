@@ -10,7 +10,7 @@
         <div id="myBar"></div>
       </div>
       <br>
-      <div>So cau dung:<span class="true_answer">0</span>|So cau sai: <span class="false_answer">0</span></div>
+      <div>True answer:<span class="true_answer">0</span>|False answer: <span class="false_answer">0</span></div>
       <div class="carousel-inner" role="listbox">
         <% @exam_words.each do |exam_word| %>
           <div id="<%=exam_word[:word].id%>" class="carousel-item 
@@ -55,9 +55,9 @@
           </div>
         <% end %>
         <div class="carousel-item" >
-          <h2>Tong so cau:<%=@exam_words.length%></h2>
-          <h2>So cau dung:<span class="true_answer"></span>/<%=@exam_words.length%></h2>
-          <h2>So cau sai:<span class="false_answer"></span>/<%=@exam_words.length%></h2>
+          <h2>Number of words:<%=@exam_words.length%></h2>
+          <h2>True answer:<span class="true_answer"></span>/<%=@exam_words.length%></h2>
+          <h2>False answer:<span class="false_answer"></span>/<%=@exam_words.length%></h2>
         </div>
       </div>
       <!--/.Slides-->

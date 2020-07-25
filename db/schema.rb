@@ -37,33 +37,6 @@ ActiveRecord::Schema.define(version: 2020_07_24_034452) do
     t.index ["category_id"], name: "index_courses_on_category_id"
   end
 
-# Could not dump table "fts_words" because of following StandardError
-#   Unknown type '' for column 'word'
-
-# Could not dump table "fts_words_content" because of following StandardError
-#   Unknown type '' for column 'c0word'
-
-  create_table "fts_words_docsize", primary_key: "docid", force: :cascade do |t|
-    t.binary "size"
-  end
-
-  create_table "fts_words_segdir", primary_key: ["level", "idx"], force: :cascade do |t|
-    t.integer "level"
-    t.integer "idx"
-    t.integer "start_block"
-    t.integer "leaves_end_block"
-    t.integer "end_block"
-    t.binary "root"
-  end
-
-  create_table "fts_words_segments", primary_key: "blockid", force: :cascade do |t|
-    t.binary "block"
-  end
-
-  create_table "fts_words_stat", force: :cascade do |t|
-    t.binary "value"
-  end
-
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
