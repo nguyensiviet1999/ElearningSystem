@@ -1,0 +1,13 @@
+<%= form_for @chatroom do |f| %>
+  <%= f.label :topic, "topic" %>
+  <%= f.text_field :topic %>
+  <%= f.label :course_id, "khoa hoc" %>
+  <%= f.select(:course_id, @options_course) %>
+  <%= f.label :gold_bet, "tien cuoc" %>
+  <%= f.number_field :gold_bet, step: 1 %>
+  <%= f.label :number_members, "so nguoi" %>
+  <%= f.hidden_field :number_members, value: "1" %>
+  <%= f.label :number_of_words, "so tu" %>
+  <%= f.text_field :number_of_words %>
+  <%= f.submit "Submit"%>
+<% end %>

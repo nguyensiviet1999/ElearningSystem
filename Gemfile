@@ -8,8 +8,11 @@ gem "rufo"
 gem "ransack"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
+gem "redis"
+gem "devise"
 #phan trang voi array
 gem "pagy"
+gem "jquery-countdown-rails"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.0.3", ">= 6.0.3.2"
 # Use sqlite3 as the database for Active Record

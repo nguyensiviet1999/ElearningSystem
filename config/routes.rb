@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "messages/create"
+  get "messages/show"
   get "courses/new_release" => "courses#new_release", :as => :new_release
   get "sessions/new"
   get "static_pages/home"
@@ -44,5 +46,8 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
   resources :user_learned_words, only: [:create, :destroy]
-
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => "/cable"
+  resources :chatrooms, param: :slug
+  resources :messages
 end

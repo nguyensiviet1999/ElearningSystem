@@ -32,6 +32,7 @@ class SessionsController < ApplicationController
       random_password = User.new_token
       name = response[:info][:email].split("@")[0]
       user = User.new(name: name, email: response[:info][:email], remote_avatar_url: response[:info][:image], activated: 1, password: random_password, password_confirmation: random_password)
+
       if user.save
         flash[:success] = "dang nhap thanh cong bang email"
         log_in user

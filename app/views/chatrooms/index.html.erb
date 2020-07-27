@@ -1,0 +1,13 @@
+<%= link_to  "tao moi", new_chatroom_path %>
+<div class="row">
+  <div class="col-md-1">Ma phong</div>
+  <div class="col-md-1">So cau hoi</div>
+  <div class="col-md-4">Noi dung</div>
+  <div class="col-md-2">Muc cuoc</div>
+  <div class="col-md-2">So nguoi choi</div>
+  <div class="col-md-2">Trang thai</div>
+</div>
+<% if @chatrooms.present? %>
+  <%= render @chatrooms %>
+  <%= will_paginate %>
+<% end %>
