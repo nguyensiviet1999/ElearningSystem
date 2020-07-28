@@ -1,19 +1,46 @@
-<div class="row col-md-8 offset-md-2">
-  <h1><%=@chatroom.topic%></h1>
-  <div class="panel panel-default">
-    <% if @chatroom.messages.any? %>
-      <div class="panel-body" id="messages">
-        <%= render partial:"messages/message",collection: @chatroom.messages %>
+<div class="row">
+  <div class=" col-md-10 offset-md-2">
+    <div class="row">
+      <div class="col-md-8 main_board">
+        <div>
+          <% if current_user.id == @chatroom.user_id %>
+            <% if @chatroom.members.count == @chatroom.join_chatrooms.count(:ready) %>
+              <%= link_to  "Start", start_chatroom_path, remote:true, id:"start", class:"btn btn-success"%>
+            <% else %>
+              <%= link_to  "Start", start_chatroom_path, remote:true, id:"start",hidden: true, class:"btn btn-success"%>
+            <% end %>
+          <% else %>
+            <% if current_user.join_chatrooms.find_by(chatroom_id: @chatroom.id).ready?%>
+              <%= link_to  "Ready", ready_chatroom_path, remote:true, id:"ready",hidden: true, class:"btn btn-success"%>
+            <% else %>
+              <%= link_to  "Ready", ready_chatroom_path, remote:true, id:"ready", class:"btn btn-success"%>
+            <% end %>
+          <% end %>
+          <div id="countdown" hidden>5</div>
+        </div>
       </div>
-    <% else %>
-      <div class="panel-body hidden" id="messages">
+      <div class="col-md-4">
+        <h1><%=@chatroom.topic%></h1>
+        <div class="panel panel-default">
+          <% if @chatroom.messages.any? %>
+            <div class="panel-body" id="messages">
+              <%= render partial:"messages/message",collection: @chatroom.messages %>
+            </div>
+          <% else %>
+            <div class="panel-body hidden" id="messages">
+            </div>
+          <% end %>
+        </div>
+        <div>
+          <%= render "messages/message_form" ,message: @message %>
+        </div>
       </div>
-    <% end %>
+    </div>
   </div>
-  <%= render "messages/message_form" ,message: @message %>
 </div>
-<%= hidden_field_tag :remaining_time, @remaining_time %>
-<div class="timer">
-  <h4>Remaining Time</h4>
-  <div id="clock"></div>
-</div>
+<script>
+  $("form").submit(function(){
+    $("#message_content").val($("#m_content").val());
+    $("#m_content").val("");
+  });
+</script>

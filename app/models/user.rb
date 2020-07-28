@@ -20,8 +20,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :messages, class_name: "Message", foreign_key: "user_id", dependent: :destroy
   has_many :notifications, as: :recipient
-  has_many :chatrooms, class_name: "Chatroom", foreign_key: "user_id", dependent: :destroy
-
+  has_many :host_chatrooms, class_name: "Chatroom", foreign_key: "user_id", dependent: :destroy
+  has_many :join_chatrooms, class_name: "JoinRoom", foreign_key: "user_id", dependent: :destroy
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true, length: { maximum: 50 }

@@ -2,7 +2,19 @@
   <div class="col-md-1"><%=chatroom.id%></div>
   <div class="col-md-1"><%=chatroom.number_of_words%></div>
   <div class="col-md-4"><%=chatroom.topic%></div>
-  <div class="col-md-2"><%=chatroom.gold_bet%></div>
-  <div class="col-md-2"><%=chatroom.number_members%></div>
-  <div class="col-md-2"><%= link_to  "Tham gia", chatroom %></div>
+  <div class="col-md-1"><%=chatroom.gold_bet%></div>
+  <div class="col-md-2" id="member_count"><%=chatroom.members.count%>/<%=chatroom.number_members%></div>
+  <% if chatroom.members.include?(current_user) %>
+    <div class="col-md-1"><%= link_to  "Vao phong", chatroom %></div>
+    <div class="col-md-1"><%= link_to  "Roi phong", join_rooms_destroy_path(id: chatroom.id) %></div>
+  <% else %>
+    <% if chatroom.members.count < chatroom.number_members %>
+      <div class="col-md-1" id="join_chatroom"><%= link_to  "Tham gia", join_rooms_create_path(id: chatroom.id) %></div>
+    <% else %>
+      <div class="col-md-2" id="join_chatroom"> Full</div>
+    <% end %>
+  <% end %>
+  <% if current_user.id == chatroom.user_id %>
+    <div class="col-md-1"><%= link_to  "Xoa phong",chatroom, method: :delete %></div>
+  <% end %>
 </div>

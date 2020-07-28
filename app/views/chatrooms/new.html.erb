@@ -1,4 +1,5 @@
 <%= form_for @chatroom do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <%= f.label :topic, "topic" %>
   <%= f.text_field :topic %>
   <%= f.label :course_id, "khoa hoc" %>
@@ -6,8 +7,8 @@
   <%= f.label :gold_bet, "tien cuoc" %>
   <%= f.number_field :gold_bet, step: 1 %>
   <%= f.label :number_members, "so nguoi" %>
-  <%= f.hidden_field :number_members, value: "1" %>
+  <%= f.number_field :number_members, step: 1  %>
   <%= f.label :number_of_words, "so tu" %>
-  <%= f.text_field :number_of_words %>
+  <%= f.number_field :number_of_words, step: 1 %>
   <%= f.submit "Submit"%>
 <% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'join_rooms/create'
+  get 'join_rooms/destroy'
   get "messages/create"
   get "messages/show"
   get "courses/new_release" => "courses#new_release", :as => :new_release
@@ -48,6 +50,10 @@ Rails.application.routes.draw do
   resources :user_learned_words, only: [:create, :destroy]
   # Serve websocket cable requests in-process
   mount ActionCable.server => "/cable"
-  resources :chatrooms, param: :slug
+  resources :chatrooms do
+    member do
+      get :start, :ready, :join_chatroom
+    end
+  end
   resources :messages
 end

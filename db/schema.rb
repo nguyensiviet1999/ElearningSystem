@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_27_103343) do
+ActiveRecord::Schema.define(version: 2020_07_28_051014) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name_category"
@@ -75,6 +75,16 @@ ActiveRecord::Schema.define(version: 2020_07_27_103343) do
 
   create_table "fts_words_stat", force: :cascade do |t|
     t.binary "value"
+  end
+
+  create_table "join_rooms", force: :cascade do |t|
+    t.integer "chatroom_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "ready"
+    t.index ["chatroom_id"], name: "index_join_rooms_on_chatroom_id"
+    t.index ["user_id"], name: "index_join_rooms_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -158,6 +168,8 @@ ActiveRecord::Schema.define(version: 2020_07_27_103343) do
 
   add_foreign_key "chatrooms", "users"
   add_foreign_key "courses", "categories"
+  add_foreign_key "join_rooms", "chatrooms"
+  add_foreign_key "join_rooms", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
