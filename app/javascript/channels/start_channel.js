@@ -13,8 +13,8 @@ consumer.subscriptions.create("StartChannel",{
         
     },
     countdown: function(data){
-        count = 5
-        id = setInterval(() => {
+        var count = 5
+        var id = setInterval(() => {
             count--;
             $('#countdown').removeAttr('hidden')
             $('#countdown').html(count)
