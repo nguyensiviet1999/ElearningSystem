@@ -6,25 +6,23 @@
         <% @learning_words.length.times do|i| %>
           <div class="carousel-item <% if @current_word == @learning_words[i] %> active<% end %>" id="<%=i+1%>">
             <!--Mask color-->
-              <div class="row">
-                <div class="col-md-8">
-                  <h1><%=@learning_words[i].word%></h1>
-                  <h2><%=@learning_words[i].pronounce%></h2>
-                  <h2><%=@learning_words[i].meaning%></h2>
-                </div>
-                <div class="col-md-2 .offset-md-2">
-                <br>
-                <br>
-                    <button class = "speech btn" data-text="<%=@learning_words[i].word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
-                </div>
+            <div class="row">
+              <div class="col-md-8">
+                <h1><%=@learning_words[i].word%></h1>
+                <h2><%=@learning_words[i].pronounce%></h2>
+                <h2><%=@learning_words[i].meaning%></h2>
               </div>
-           
+              <div class="col-md-2 .offset-md-2">
+                <br>
+                <br>
+                <button class = "speech btn" data-text="<%=@learning_words[i].word%>"><i class="fa fa-volume-down icon-play-audio"></i></button>
+              </div>
+            </div>
             <% if @learning_words[i].image.url.present? %>
-               <%= image_tag @learning_words[i].image.url%>
+              <%= image_tag @learning_words[i].image.url%>
             <% else %>
               <%= image_tag 'default_image.png' %>
             <% end %>
-            
             <%= link_to  "Test", examination_course_path(current_word_id: @learning_words[i].id), class: "btn btn-success exambtn" %>
           </div>
         <% end %>
@@ -60,25 +58,21 @@
 </div>
 <!--/.Carousel Wrapper-->
 <script>
-$('.carousel').carousel({
-    interval: 20000
-  })
- $('.carousel').carousel('pause')
- $('#carousel-example-2').on('slid.bs.carousel', function () {
-    $('#ex1').val($('.active')[1].id)
-    console.log($('.active')[1].id)
-    $('.active').children().children().next().children('.speech').click()
-  })
-  $('#go').click(function () {
-    $('.active').removeClass('active')
-    $('#'+$('#ex1').val()).addClass('active')
-  })
-  $('#ext').change(function() {
-    if(parseInt($('#ex1').val()) > <%=@learning_words.length%>){
-      alert( "Ban nhap qua so tu lon nhat" );
-      $('#ex1').val('<%=@learning_words.length%>');
-     }
-  });
- </script>
-
+  $('.carousel').carousel('pause')
+  $('#carousel-example-2').on('slid.bs.carousel', function () {
+     $('#ex1').val($('.active')[1].id)
+     console.log($('.active')[1].id)
+     $('.active').children().children().next().children('.speech').click()
+   })
+   $('#go').click(function () {
+     $('.active').removeClass('active')
+     $('#'+$('#ex1').val()).addClass('active')
+   })
+   $('#ext').change(function() {
+     if(parseInt($('#ex1').val()) > <%=@learning_words.length%>){
+       alert( "Ban nhap qua so tu lon nhat" );
+       $('#ex1').val('<%=@learning_words.length%>');
+      }
+   });
+</script>
 <%= javascript_pack_tag 'textToSpeech'%>

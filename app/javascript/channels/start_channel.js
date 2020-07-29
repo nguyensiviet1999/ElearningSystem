@@ -9,17 +9,23 @@ consumer.subscriptions.create("StartChannel",{
       },
     received: function(data){
         
-            return (this.countdown(data))
+            return (this.countdown(data), $('#start').attr('hidden',true))
         
     },
     countdown: function(data){
         var count = 5
         var id = setInterval(() => {
-            count--;
+
             $('#countdown').removeAttr('hidden')
             $('#countdown').html(count)
-            if (count == 0) {
+            count--;
+            if (count == -1) {
+                $('#countdown').html("bat dau")
+            }
+            if (count == -2) {
                 clearInterval(id)
+                $('#countdown').attr('hidden',true)
+                document.getElementById('show_match').click()
             }
         }, 1000);
     }

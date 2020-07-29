@@ -1,5 +1,5 @@
 <div class="row">
-  <div class=" col-md-10 offset-md-2">
+  <div class=" col-md-11 offset-md-1">
     <div class="row">
       <div class="col-md-8 main_board">
         <div>
@@ -17,6 +17,7 @@
             <% end %>
           <% end %>
           <div id="countdown" hidden>5</div>
+          <div class="container" id="match_broad"></div>
         </div>
       </div>
       <div class="col-md-4">
@@ -38,6 +39,8 @@
     </div>
   </div>
 </div>
+<%= link_to  "renderExamMatch", render_match_chatroom_path ,remote: true,id:"show_match", hidden: true %>
+<%= link_to  "finished", finished_chatroom_path ,remote: true,id:"finished", hidden: true, current_user_id: current_user.id %>
 <script>
   $("form").submit(function(){
     $("#message_content").val($("#m_content").val());

@@ -33,8 +33,8 @@ body {
     .course-image {
       flex: 2;
       img {
-        height: 211px;
-        width: 211px;
+        height: 100%;
+        width: 100%;
       }
     }
     .other {
@@ -43,7 +43,7 @@ body {
   }
 }
 .home_avatar {
-  border-radius: 140px; 
+  border-radius: 140px;
 }
 .stats {
   margin: auto;
@@ -163,31 +163,38 @@ body {
 }
 
 #myBar {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   width: 0px;
   height: 30px;
   position: absolute;
 }
-.edit_user{
-  img{
+.edit_user {
+  img {
     height: 50%;
     width: 50%;
   }
 }
-.user_info{
-  img{
+.user_info {
+  img {
     height: 50%;
     width: 50%;
   }
 }
-.panel-default{
+.panel-default {
   border: 1px solid black;
   height: 250px;
   width: 100%;
   overflow-y: auto;
-
 }
-.main_board{
+.main_board {
   border: 1px solid black;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  #countdown{
+    font-size: 50px;
+  }
 }

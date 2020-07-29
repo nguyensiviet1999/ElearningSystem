@@ -1,13 +1,8 @@
 <% if @correct_answer %>
   $("#<%= @answer_at%>").parent().removeClass("btn-primary").addClass( "btn-success" );
-  alert( "Chuc mung ban da chon dung roi" );
   setTimeout(function(){  $('.carousel').carousel('next'); }, 1000);
   <%# $('.carousel').carousel('next'); %>
-  $('.true_answer').html(parseInt($('.true_answer').html())+1);
 <% else %>
   $("#<%= @answer_at%>").parent().removeClass( "btn-primary" ).addClass( "btn-danger" );
-  alert( "Dang tiec ban da chon sai mat roi" );
-  setTimeout(function(){  $('.carousel').carousel('next'); }, 1000);
   <%# $('.carousel').carousel('next'); %>
-  $('.false_answer').html(parseInt($('.false_answer').html())+1);
 <% end %>

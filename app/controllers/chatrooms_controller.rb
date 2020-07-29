@@ -1,4 +1,6 @@
 class ChatroomsController < ApplicationController
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+
   def new
     @chatroom = Chatroom.new
     @courses = Course.all
@@ -60,6 +62,44 @@ class ChatroomsController < ApplicationController
     ActionCable.server.broadcast "ready",
                                  ready_member: chatroom.join_chatrooms.count(:ready),
                                  member_of_room: chatroom.members.count
+    head :ok
+  end
+
+  def render_match
+    @chatroom = Chatroom.find(params[:id])
+    @current_word = Course.find(@chatroom.course_id).words.first
+    @exam_words = []
+    number_of_words = Course.find(@chatroom.course_id).words.count > @chatroom.number_of_words ? @chatroom.number_of_words : Course.find(@chatroom.course_id).words.count
+    all_words_of_course = Course.find(@chatroom.course_id).words.limit(number_of_words)
+    index = 0
+    index_current_word = 0
+    all_words_of_course.each { |word|
+      index_current_word = index if word == @current_word
+      answer = Array.new
+      shuffle_all_words = Word.limit(20).shuffle
+      4.times { |i|
+        if (shuffle_all_words[i].meaning != word.meaning)
+          answer.push(shuffle_all_words[i].meaning)
+        end
+        break if (answer.length == 3)
+      }
+      answer.push(word.meaning)
+      @exam_words.push({ :word => word, :answer => answer.shuffle! })
+      index = index + 1
+    }
+
+    @exam_words[0], @exam_words[index_current_word] = @exam_words[index_current_word], @exam_words[0]
+    @exam_words[1..(@exam_words.length - 1)].shuffle!
+    respond_to do |format|
+      format.html { }
+      format.js
+    end
+    # puts @exam_words
+  end
+
+  def finished
+    ActionCable.server.broadcast "finished",
+                                 winner_id: current_user.id
     head :ok
   end
 

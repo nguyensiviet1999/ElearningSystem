@@ -1,42 +1,39 @@
 <div class="col-sm-4 course">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title"><%= link_to course.course_name, course %></a></h5>
-            <% if logged_in? %>
-            <% if current_user.joined_course?(course) %>
-            <%= link_to "Continue", course , class: "btn btn-success" %>
-            <% else %>
-            <%= form_for(current_user.results.build) do |f| %>
-            <div>
-                <%= hidden_field_tag :course_id, course.id %>
-            </div>
-            <%= f.submit "Join", class: "btn btn-success" %>
-            <% end %>
-            <% end %>
-            <% end %>
-        </div>
-        <div class="course-image">
-            <%= link_to image_tag(course.image.url, alt: "Course logo",class:"card-img-top"), course %>
-        </div>
-        <div class="other">
-            <p>Number of words: <%= course.words.count %></p>
-            <% if logged_in? %>
-            <% if course.words.count>0 %>
-                <p>Learned Words: <%=current_user.learned_words_of_course(course.id).count%>/<%= course.words.count %></p>
-            <% else %>
-                <p>Learned Words: 0/<%= course.words.count %></p>
-            <% end %>
-            
-            <% if course.words.count >= 4 %>
-                 <a href="<%=examination_course_path(id: course.id,current_word_id: course.words.first.id)%>" class="btn btn-success">Test</a>
-            <% end %>
-           
-                <% if current_user.admin? %>
-                    <button type="button" class="btn btn-danger showmodal" data-toggle="modal" data-target="#exampleModal" id="<%= course.id %>">Delete
-                    </button>
-                <% end %>
-            <% end %>
-        </div>
-
-    </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to course.course_name, course %></a></h5>
+    <% if logged_in? %>
+      <% if current_user.joined_course?(course) %>
+        <%= link_to "Continue", course , class: "btn btn-success" %>
+      <% else %>
+        <%= form_for(current_user.results.build) do |f| %>
+          <div>
+            <%= hidden_field_tag :course_id, course.id %>
+          </div>
+          <%= f.submit "Join", class: "btn btn-success" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="course-image">
+    <%= link_to image_tag(course.image.url, alt: "Course logo",class:"card-img-top"), course %>
+  </div>
+  <div class="other">
+    <p>Number of words: <%= course.words.count %></p>
+    <% if logged_in? %>
+      <% if course.words.count>0 %>
+        <p>Learned Words: <%=current_user.learned_words_of_course(course.id).count%>/<%= course.words.count %></p>
+      <% else %>
+        <p>Learned Words: 0/<%= course.words.count %></p>
+      <% end %>
+      <% if course.words.count >= 4 %>
+        <a href="<%=examination_course_path(id: course.id,current_word_id: course.words.first.id)%>" class="btn btn-success">Test</a>
+      <% end %>
+      <% if current_user.admin? %>
+        <button type="button" class="btn btn-danger showmodal" data-toggle="modal" data-target="#exampleModal" id="<%= course.id %>">Delete
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 </div>

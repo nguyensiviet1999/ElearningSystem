@@ -3,7 +3,7 @@
 <% @user ||= current_user %>
 <div class="row">
     <div class="col-md-4">
-
+        <div class="row">
         <div class="card" style="width: 18rem;">
             <% if logged_in? %>
              <h5 class="card-title text-center ">Personal information</h5>
@@ -37,7 +37,6 @@
                             <a class="btn btn-primary d-block" href=<%=new_word_path%>>Add Word</a>
                             <div class="dropdown-divider"></div>
                         <% end %>
-                    <a class="btn btn-primary d-block" href=<%=new_word_path%>>chat room</a>
                     <div class="dropdown-divider"></div>
                     <a class="btn btn-primary d-block" href=<%=all_joined_courses_user_path(@user)%>>Joined Courses</a>
                     <% else %>
@@ -53,6 +52,7 @@
                 
             </div>
         </div>
+         </div>
         <%=render 'static_pages/ranking'%>
     </div>
     <div class="col-md-8">

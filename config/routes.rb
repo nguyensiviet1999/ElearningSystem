@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'join_rooms/create'
-  get 'join_rooms/destroy'
+  get "join_rooms/create"
+  get "join_rooms/destroy"
   get "messages/create"
   get "messages/show"
   get "courses/new_release" => "courses#new_release", :as => :new_release
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => "/cable"
   resources :chatrooms do
     member do
-      get :start, :ready, :join_chatroom
+      get :start, :ready, :join_chatroom, :render_match ,:finished
     end
   end
   resources :messages
