@@ -49,6 +49,7 @@ class ChatroomsController < ApplicationController
 
   def start
     chatroom = Chatroom.find(params[:id])
+    chatroom.update_attribute(:started, true)
     ActionCable.server.broadcast "start",
                                  ready_member: chatroom.join_chatrooms.count(:ready),
                                  member_of_room: chatroom.members.count

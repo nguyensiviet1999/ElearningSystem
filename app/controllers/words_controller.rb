@@ -2,6 +2,7 @@ class WordsController < ApplicationController
   before_action :logged_in_user, only: [:index]
 
   def index
+    
     if (params[:commit].present? && params[:commit] == "Tim kiem")
       #sap xep
       search = params[:search] if params[:search].present?
