@@ -15,8 +15,13 @@ class JoinRoomsController < ApplicationController
 
   def destroy
     @chatroom = Chatroom.find(params[:id])
-    current_user.join_chatrooms.find_by(chatroom_id: @chatroom.id).destroy
-    # @chatroom.update_attribute(:number_members, (@chatroom.number_members - 1))
-    redirect_to chatrooms_path
+    current_user.join_chatrooms.find_by(chatroom_id: @chatroom.id).destroy if current_user.join_chatrooms.find_by(chatroom_id: @chatroom.id).present?
+    ActionCable.server.broadcast "leave",
+                                 chatroom_id: @chatroom.id,
+                                 user_id: current_user.id,
+                                 user_url: current_user,
+                                 member_of_room: @chatroom.members.count,
+                                 max_member: @chatroom.number_members
+    head :ok
   end
 end

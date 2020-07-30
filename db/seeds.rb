@@ -24,12 +24,15 @@ User.create!(name: "Example User",
 end
 
 Word.create!(word: "test",
-             meaning: "Kiểm tra",
+             meaning: "Kiem tra",
              pronounce: "/test/",
-             word_type: "danh từ")
+             word_type: "danh tu")
 
 users = User.all
 word = Word.first
 users[2..9].each { |user|
   user.learned_word(word)
 }
+Category.create!(name_category: "English")
+Course.create!(course_name: "English Basic",
+               category_id: 1)

@@ -43,8 +43,9 @@ class ChatroomsController < ApplicationController
   end
 
   def destroy
-    Chatroom.find(params[:id]).destroy
-    redirect_to chatrooms_path
+    if Chatroom.find(params[:id]).destroy
+      redirect_to chatrooms_path
+    end
   end
 
   def start
@@ -101,6 +102,18 @@ class ChatroomsController < ApplicationController
   def finished
     ActionCable.server.broadcast "finished",
                                  winner_id: current_user.id
+    head :ok
+  end
+
+  def check_room_status
+    chatroom = Chatroom.find(params[:id])
+
+    ActionCable.server.broadcast "check_room_status",
+                                 title: current_user.name,
+                                 avatar: current_user.avatar.url,
+                                 link_to: current_user,
+                                 ready_member: chatroom.join_chatrooms.count(:ready),
+                                 member_of_room: chatroom.members.count
     head :ok
   end
 

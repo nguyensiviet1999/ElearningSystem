@@ -198,3 +198,12 @@ body {
     font-size: 50px;
   }
 }
+.online_member{
+  color: #39e80d;
+  .card-img-top{
+    height: 35%;
+    width: 35%;
+    border-radius: 25px;
+    border: 2px solid  #39e80d;
+  }
+}

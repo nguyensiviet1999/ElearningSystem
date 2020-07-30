@@ -1,5 +1,10 @@
 <div class="row">
-  <div class=" col-md-11 offset-md-1">
+  <div class="col-md-2">
+    <ul class="online_member">
+      <%= render 'chatrooms/online_user', members: @chatroom.members  %>
+    </ul>
+  </div>
+  <div class="col-md-10">
     <div class="row">
       <div class="col-md-8 main_board">
         <div>
@@ -46,4 +51,7 @@
     $("#message_content").val($("#m_content").val());
     $("#m_content").val("");
   });
+  $('.online_room').hover(function() {
+    $('.online_room').tooltip({ boundary: 'window' })
+  })
 </script>

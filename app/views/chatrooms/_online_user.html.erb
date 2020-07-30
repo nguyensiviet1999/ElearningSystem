@@ -1,0 +1,9 @@
+<% members.each do |member| %>
+  <li>
+    <% if member.avatar.url.present? %>
+      <%= link_to image_tag(member.avatar.url, alt: member.name ,class:"card-img-top online_room",title:member.name), member, title:member.name, toggle:"tooltip" %>
+    <% else %>
+      <%= link_to image_tag('default_image.png' ,class:"card-img-top online_room", title:member.name), member , title:member.name, toggle:"tooltip"%>
+    <% end %>
+  </li>
+<% end %>

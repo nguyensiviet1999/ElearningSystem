@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   mount ActionCable.server => "/cable"
   resources :chatrooms do
     member do
-      get :start, :ready, :join_chatroom, :render_match ,:finished
+      get :start, :ready, :join_chatroom, :render_match ,:finished,:check_room_status
     end
   end
   resources :messages

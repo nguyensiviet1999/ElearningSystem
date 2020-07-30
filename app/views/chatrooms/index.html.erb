@@ -11,3 +11,15 @@
   <%= render @chatrooms %>
   <%= will_paginate %>
 <% end %>
+<script>
+  $('.join_chatroom').click(function() {
+    id_room = $(this).attr('id_room')
+    document.getElementById(id_room).click()
+  })
+  $('.leave').click(function() {
+   id_room = $(this).attr('id_room')
+   $('#room_button').html("")
+   $('#room_button').append('<div class="col-md-1 join_chatroom" id_room="'+id_room+'"><a href="/join_rooms/create?id='+id_room+'">Tham gia</a></div>')
+  
+  })
+</script>
