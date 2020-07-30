@@ -20,6 +20,6 @@ consumer.subscriptions.create("JoinChatroomChannel",{
     changeMemberOfRoom: function(){
         var member = parseInt($('#member_count').html.split('/')[0])+1
         var max_member = $('#member_count').html.split('/')[1]
-        return ($('#member_count').html(member+'/'+max_member))
+        return ($('#member_count').html(member.toString+'/'+max_member))
     }
 });

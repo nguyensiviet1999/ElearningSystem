@@ -1,7 +1,8 @@
 class CourseWordsController < ApplicationController
   def new
     @course = Course.find(params[:course_id])
-    @words = Word.where.not(id: @course.words.ids)
+    @words = Word.all
+    # @words = Word.where.not(id: @course.words.ids)
     @pagy_a, @words = pagy_array(@words, items: 4)
   end
 

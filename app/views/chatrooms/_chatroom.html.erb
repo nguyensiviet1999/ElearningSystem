@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row" id="room_<%=chatroom.id%>">
   <div class="col-md-1"><%=chatroom.id%></div>
   <div class="col-md-1"><%=chatroom.number_of_words%></div>
   <div class="col-md-4"><%=chatroom.topic%></div>
   <div class="col-md-1"><%=chatroom.gold_bet%></div>
   <div class="col-md-2" id="member_count"><%=chatroom.members.count%>/<%=chatroom.number_members%></div>
-  <div id="room_button col-md-3">
+  <div id="room_button" class="col-md-3">
     <% if chatroom.members.include?(current_user) %>
       <div class="col-md-1"><%= link_to  "Vào", chatroom %></div>
       <div class="col-md-1 leave" <%if current_user.id == chatroom.user_id%> hidden <%end%> id_room="<%= chatroom.id %>"><%= link_to  "Rời", join_rooms_destroy_path(id: chatroom.id) ,remote: true  %></div>
@@ -12,11 +12,11 @@
       <% if chatroom.members.count < chatroom.number_members %>
         <div class="col-md-1 join_chatroom" id_room="<%= chatroom.id %>"><%= link_to  "Tham gia", join_rooms_create_path(id: chatroom.id) %></div>
       <% else %>
-        <div class="col-md-2" class="join_chatroom"> Full</div>
+        <div class="col-md-2" id="is_full">Full</div>
       <% end %>
     <% end %>
     <% if current_user.id == chatroom.user_id %>
-      <div class="col-md-1"><%= link_to  "Xoá",chatroom, method: :delete %></div>
+      <div class="col-md-1"><%= link_to  "Xoá",chatroom, method: :delete,remote: true %></div>
     <% end %>
   </div>
 </div>

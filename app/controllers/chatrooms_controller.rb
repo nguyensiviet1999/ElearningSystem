@@ -44,7 +44,10 @@ class ChatroomsController < ApplicationController
 
   def destroy
     if Chatroom.find(params[:id]).destroy
-      redirect_to chatrooms_path
+      ActionCable.server.broadcast "delete_room",
+                                   root_url: root_url,
+                                   id_room: params[:id]
+      head :ok
     end
   end
 
@@ -113,7 +116,10 @@ class ChatroomsController < ApplicationController
                                  avatar: current_user.avatar.url,
                                  link_to: current_user,
                                  ready_member: chatroom.join_chatrooms.count(:ready),
-                                 member_of_room: chatroom.members.count
+                                 member_of_room: chatroom.members.count,
+                                 max_number_members: chatroom.number_members
+          
+                                 
     head :ok
   end
 
