@@ -26,7 +26,7 @@
             <%= image_tag course.image.url ,class:"card-img-top",alt:"Card image cap" %>
             <div class="card-body">
               <h5 class="card-title"><%=course.course_name%></h5>
-              <p class="card-text">Số từ đã học: <%=@user.learned_words_of_course(course.id).count%>/<%= course.words.count %>.</p>
+              <p class="card-text">Số từ đã học: <%=@user.learned_words_of_course(course.id,@user.id).count%>/<%= course.words.count %>.</p>
               <%# <a href="#" class="btn btn-primary">Go somewhere</a> %>
             </div>
           </div>

@@ -2,22 +2,21 @@ class WordsController < ApplicationController
   before_action :logged_in_user, only: [:index]
 
   def index
-    
     if (params[:commit].present? && params[:commit] == "Tim kiem")
       #sap xep
       search = params[:search] if params[:search].present?
       if params[:learning_status].present?
         if params[:course_id].present? && params[:course_id] != "0"
           if params[:learning_status] == "1"
-            @words = current_user.learned_words_of_course(params[:course_id].to_i)
+            @words = current_user.learned_words_of_course(params[:course_id].to_i, current_user.id)
           else
-            @words = current_user.words_not_learned(params[:course_id].to_i)
+            @words = current_user.words_not_learned(params[:course_id].to_i,current_user.id)
           end
         else
           if params[:learning_status] == "1"
             @words = current_user.learned_words
           else
-            @words = current_user.words_not_learned(params[:course_id].to_i)
+            @words = current_user.words_not_learned(params[:course_id].to_i,current_user.id)
             # puts @words.inspect
           end
         end
@@ -86,7 +85,7 @@ class WordsController < ApplicationController
     search = params[:search] if params[:search].present?
     if params[:learning_status].present?
       if params[:course_id].present? && params[:course_id] != 0
-        @words = current_user.learned_words_of_course(params[:course_id])
+        @words = current_user.learned_words_of_course(params[:course_id],current_user.id)
       else
         @words = current_user.learned_words
       end

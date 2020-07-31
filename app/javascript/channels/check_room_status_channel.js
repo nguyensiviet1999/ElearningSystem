@@ -12,7 +12,7 @@ consumer.subscriptions.create("CheckRoomStatusChannel",{
             return (this.checkFullRoom(data),this.changeMemberOfRoom(),$("#start").attr("hidden",true),$(".online_member").append(this.renderOnlineMember(data)))
         }
         else{
-            return (this.checkFullRoom(data),this.changeMemberOfRoom(),$(".online_member").append(this.renderOnlineMember(data)),$("#start").removeAttr("hidden"))
+            return (this.checkFullRoom(data),this.changeMemberOfRoom(),$(".online_member").append(this.renderOnlineMember(data)))
         }
     },
     renderOnlineMember: function(data){
@@ -25,17 +25,15 @@ consumer.subscriptions.create("CheckRoomStatusChannel",{
         }
     },
     changeMemberOfRoom: function(){
-        var member = "";
-        var max_member = "";
-        if ( $('#member_count') != null){
+        if ($('#member_count').html() != null){
+            var member = "";
+            var max_member = "";
              member = parseInt($('#member_count').html().split('/')[0])+1
              max_member = $('#member_count').html().split('/')[1]
+             if (member>max_member) {
+                member = max_member
+            }
+            return ($('#member_count').html(member+'/'+max_member))
         }
-       
-        if (member>max_member) {
-            member = max_member
-        }
-        return ($('#member_count').html(member+'/'+max_member))
     }
-
 });

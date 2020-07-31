@@ -102,18 +102,21 @@ class User < ApplicationRecord
     user_learned_words.find_by(word_id: word.id).destroy
   end
 
-  def learned_words_of_course(course_id)
-    learned_words_of_course = Course.find(course_id).words && learned_words
+  def learned_words_of_course(course_id, user_id)
+    learned_words_of_course = Word.joins(:course_words, "INNER JOIN user_learned_words ON user_learned_words.word_id = words.id").where("course_words.course_id" => course_id, "user_learned_words.user_id" => user_id)
+    # where("course_words.course_id" => course_id, "user_learned_words.user_id" => user_id)
+    # Word.joins(:course_words, :user_learned_words).where(course_words: { course_id: course_id }, user_learned_words: { user_id: user_id })
+
     return learned_words_of_course
   end
 
-  def words_not_learned(course_id)
+  def words_not_learned(course_id, user_id)
     words_not_learned = []
     if (course_id == 0)
       words_not_learned = Word.where.not(id: learned_words.ids)
     else
       Course.find(course_id).words.each do |word|
-        words_not_learned.push(word) if !learned_words_of_course(course_id).include?(word)
+        words_not_learned.push(word) if !learned_words_of_course(course_id, user_id).include?(word)
       end
     end
     return words_not_learned

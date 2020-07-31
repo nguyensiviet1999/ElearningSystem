@@ -114,12 +114,11 @@ class ChatroomsController < ApplicationController
     ActionCable.server.broadcast "check_room_status",
                                  title: current_user.name,
                                  avatar: current_user.avatar.url,
-                                 link_to: current_user,
+                                 link_to: "/users/" + current_user.id.to_s,
                                  ready_member: chatroom.join_chatrooms.count(:ready),
                                  member_of_room: chatroom.members.count,
                                  max_number_members: chatroom.number_members
-          
-                                 
+
     head :ok
   end
 

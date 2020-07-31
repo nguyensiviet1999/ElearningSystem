@@ -12,9 +12,10 @@ consumer.subscriptions.create("FinishedChannel",{
         if (data.winner_id == $('#finished').attr('current_user_id')) {
             notification_msg = "Ban la nguoi chien thang"
         } else {
+            $(".carousel-item").find('.active').removeClass('active')
             notification_msg = "Ban la nguoi thua cuoc"
         }
         
-        return ($("#finish_slide").html(notification_msg));
+        return ($("#finish_slide").html(notification_msg),$("#finish_slide").addClass('active'),document.getElementById('stopTime').click());
     }
 });

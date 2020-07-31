@@ -103,8 +103,8 @@ ActiveRecord::Schema.define(version: 2020_07_29_080540) do
   end
 
   create_table "user_learned_words", force: :cascade do |t|
-    t.integer "word_id", null: false
-    t.integer "user_id", null: false
+    t.integer "word_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_learned_words_on_user_id"
@@ -150,6 +150,4 @@ ActiveRecord::Schema.define(version: 2020_07_29_080540) do
   add_foreign_key "notifications", "users"
   add_foreign_key "results", "courses"
   add_foreign_key "results", "users"
-  add_foreign_key "user_learned_words", "users"
-  add_foreign_key "user_learned_words", "words"
 end

@@ -22,7 +22,7 @@
     <p>Number of words: <%= course.words.count %></p>
     <% if logged_in? %>
       <% if course.words.count>0 %>
-        <p>Learned Words: <%=current_user.learned_words_of_course(course.id).count%>/<%= course.words.count %></p>
+        <p>Learned Words: <%=current_user.learned_words_of_course(course.id,current_user.id).count%>/<%= course.words.count %></p>
       <% else %>
         <p>Learned Words: 0/<%= course.words.count %></p>
       <% end %>

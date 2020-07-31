@@ -64,8 +64,10 @@
     </div>
   </div>
 </div>
+<button id="stopTime" hidden></button>
 <!--/.Carousel Wrapper-->
 <script type="text/javascript">
+
   $( document ).ready(function() {
     $('.carousel').carousel('pause');
     var elem = document.getElementById("myBar");
@@ -95,12 +97,18 @@
       $('.answer').parent().removeClass("btn-danger").addClass( "btn-primary" );
       $('.answer').parent().removeClass("btn-success").addClass( "btn-primary" );
       width = 0
-      if (e.to == <%=@exam_words.length%>) {
+      if (e.relatedTarget.getAttribute('id')=='finish_slide') {
+        clearInterval(id);
         document.getElementById('finished').click()
+    
       }
       console.log(e)
     })
+    $(document).on('click','#stopTime',function () {
+      clearInterval(id);
+    })
   });
+  
 </script>
 <script>
   $('.carousel').carousel('pause');

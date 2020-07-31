@@ -26,7 +26,8 @@ end
 Word.create!(word: "test",
              meaning: "Kiem tra",
              pronounce: "/test/",
-             word_type: "danh tu")
+             word_type: "danh tu",
+             image: "default_image.png")
 
 users = User.all
 word = Word.first
@@ -35,4 +36,5 @@ users[2..9].each { |user|
 }
 Category.create!(name_category: "English")
 Course.create!(course_name: "English Basic",
-               category_id: 1)
+               category_id: 1,
+               remote_image_url: "https://nguoikechuyen.net/wp-content/themes/fox/images/placeholder.jpg")

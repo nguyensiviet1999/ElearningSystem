@@ -21,7 +21,8 @@ class JoinRoomsController < ApplicationController
                                  user_id: current_user.id,
                                  user_url: current_user,
                                  member_of_room: @chatroom.members.count,
-                                 max_member: @chatroom.number_members
+                                 max_member: @chatroom.number_members,
+                                 ready_member: @chatroom.join_chatrooms.count(:ready)
     head :ok
   end
 end
