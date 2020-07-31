@@ -5,7 +5,10 @@ class MessagesController < ApplicationController
     if message.save
       ActionCable.server.broadcast "messages",
         message: message.content,
-        user: message.user.name
+        user: message.user.name,
+        id_room: message.chatroom_id,
+        root_url: root_url
+
       head :ok
     else
       redirect_to chatrooms_path

@@ -10,12 +10,14 @@ consumer.subscriptions.create("FinishedChannel",{
     received: function(data){
         var notification_msg=""
         if (data.winner_id == $('#finished').attr('current_user_id')) {
-            notification_msg = "Ban la nguoi chien thang"
+            notification_msg = "Ban la nguoi chien thang<div><a href=''>Dau lai</a><a href='/chatrooms'>Chon phong khac</a></div>"
         } else {
-            $(".carousel-item").find('.active').removeClass('active')
-            notification_msg = "Ban la nguoi thua cuoc"
+            
+            notification_msg = "Ban la nguoi thua cuoc<div><a href=''>Dau lai</a><a href='/chatrooms'>Chon phong khac</a></div>"
         }
-        
-        return ($("#finish_slide").html(notification_msg),$("#finish_slide").addClass('active'),document.getElementById('stopTime').click());
+        return ($(".carousel-item").removeClass("active"),$("#finish_slide").html(notification_msg),$("#finish_slide").addClass('active'),document.getElementById('stopTime').click());
+    },
+    removeStarted:function(data){
+
     }
 });

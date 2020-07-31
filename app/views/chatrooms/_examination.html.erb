@@ -55,7 +55,15 @@
           </div>
         <% end %>
         <div class="carousel-item" id="finish_slide">
-          Xin chúc mừng bạn đã hoàn thành
+       
+         
+           <div id="finish_notifi">
+             Xin chúc mừng bạn đã hoàn thành
+           </div>
+           <div>
+            <%= link_to  "Đấu lại", "" %>
+            <%= link_to  "Chọn Phòng khác", chatrooms_path %>
+           </div>
         </div>
       </div>
       <!--/.Slides-->
@@ -75,16 +83,16 @@
     var id = setInterval(frame, 10);
     
     function frame() {
-
-        
       if (width == 15000) {
-        width = 0;
-        console.log(typeof $('.unlearned'))
+        console.log(width)
+        clearInterval(id);
         if(typeof $('div.active').attr('id') == "undefined"){
           clearInterval(id);
         }
         unlearn = $('div.active').attr('id')+'_unlearned';
-        document.getElementById(unlearn).click();
+        if (unlearn) {
+          document.getElementById(unlearn).click();
+        }
         $('.false_answer').html(parseInt($('.false_answer').html())+1);
         $('.carousel').carousel('next');
       } else {
@@ -100,7 +108,6 @@
       if (e.relatedTarget.getAttribute('id')=='finish_slide') {
         clearInterval(id);
         document.getElementById('finished').click()
-    
       }
       console.log(e)
     })

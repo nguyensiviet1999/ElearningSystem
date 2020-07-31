@@ -36,6 +36,10 @@ class ChatroomsController < ApplicationController
   def show
     @chatroom = Chatroom.find(params[:id])
     @message = Message.new
+    if @chatroom.started?
+      flash[:danger] = "Started..."
+      redirect_to chatrooms_path
+    end
   end
 
   def index
@@ -56,7 +60,9 @@ class ChatroomsController < ApplicationController
     chatroom.update_attribute(:started, true)
     ActionCable.server.broadcast "start",
                                  ready_member: chatroom.join_chatrooms.count(:ready),
-                                 member_of_room: chatroom.members.count
+                                 member_of_room: chatroom.members.count,
+                                 root_url: root_url,
+                                 id_room: params[:id]
     head :ok
   end
 
@@ -66,7 +72,9 @@ class ChatroomsController < ApplicationController
     current_user.join_chatrooms.find_by(chatroom_id: chatroom.id).update_attribute(:ready, true)
     ActionCable.server.broadcast "ready",
                                  ready_member: chatroom.join_chatrooms.count(:ready),
-                                 member_of_room: chatroom.members.count
+                                 member_of_room: chatroom.members.count,
+                                 root_url: root_url,
+                                 id_room: params[:id]
     head :ok
   end
 
@@ -103,8 +111,12 @@ class ChatroomsController < ApplicationController
   end
 
   def finished
+    chatroom = Chatroom.find(params[:id])
+    chatroom.update_attribute(:started, false)
     ActionCable.server.broadcast "finished",
-                                 winner_id: current_user.id
+                                 winner_id: current_user.id,
+                                 root_url: root_url,
+                                 id_room: params[:id]
     head :ok
   end
 
@@ -117,7 +129,10 @@ class ChatroomsController < ApplicationController
                                  link_to: "/users/" + current_user.id.to_s,
                                  ready_member: chatroom.join_chatrooms.count(:ready),
                                  member_of_room: chatroom.members.count,
-                                 max_number_members: chatroom.number_members
+                                 max_number_members: chatroom.number_members,
+                                 root_url: root_url,
+                                 id_room: params[:id],
+                                 is_started: @chatroom.started?
 
     head :ok
   end
