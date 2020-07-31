@@ -15,9 +15,12 @@ consumer.subscriptions.create("FinishedChannel",{
             
             notification_msg = "Ban la nguoi thua cuoc<div><a href=''>Dau lai</a><a href='/chatrooms'>Chon phong khac</a></div>"
         }
-        return ($(".carousel-item").removeClass("active"),$("#finish_slide").html(notification_msg),$("#finish_slide").addClass('active'),document.getElementById('stopTime').click());
+        return ($(".carousel-item").removeClass("active"),$("#finish_slide").html(notification_msg),$("#finish_slide").addClass('active'),document.getElementById('stopTime').click(),this.removeStarted(data));
     },
     removeStarted:function(data){
-
+        $('#room_button_'+data.chatroom_id).children().first().html("")
+        $('#room_button_'+data.chatroom_id).children().first().addClass('join_chatroom')
+        $('#room_button_'+data.chatroom_id).children().first().attr('id',data.chatroom_id)
+        $('#room_button_'+data.chatroom_id).children().first().append('<a href="/join_rooms/create?id='+data.chatroom_id+'">Tham gia</a>')
     }
 });
