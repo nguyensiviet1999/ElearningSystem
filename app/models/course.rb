@@ -1,5 +1,5 @@
 class Course < ApplicationRecord
-  has_one :category
+  belongs_to :category
   has_many :results, class_name: "Result", foreign_key: "course_id", dependent: :destroy
   has_many :users, through: :results, source: :user
   has_many :course_words, class_name: "CourseWord", foreign_key: "course_id", dependent: :destroy
