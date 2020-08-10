@@ -1,7 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.web_socket_server_url = "wss://viet-elearning-system.herokuapp.com/cable"
-  config.action_cable.allowed_request_origins = ["https://viet-elearning-system.herokuapp.com", "http://viet-elearning-system.herokuapp.com"]
+  config.web_socket_server_url = "wss://elearning-your-system.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ["https://elearning-your-system.herokuapp.com", "http://elearning-your-system.herokuapp.com"]
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -102,7 +102,19 @@ Rails.application.configure do
   # timestamps for the last write to the primary. The resolver uses the context
   # class timestamps to determine how long to wait before reading from the
   # replica.
-  #
+  config.action_mailer.delivery_method = :smtp
+  host = "https://elearning-your-system.herokuapp.com"
+  config.action_mailer.default_url_options = { host: host }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = { from: "no-reply@example.com" }
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: "autoname1999@gmail.com",
+    password: "ilcimepnohpudqqo",
+    authentication: "plain",
+    enable_starttls_auto: true,
+  }
   # By default Rails will store a last write timestamp in the session. The
   # DatabaseSelector middleware is designed as such you can define your own
   # strategy for connection switching and pass that into the middleware through
