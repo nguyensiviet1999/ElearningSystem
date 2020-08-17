@@ -30,4 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  static_pages:
+    home:
+      hello: "Hello world"
+      welcome: "Welcome!"
+      services_html: "We provide some fancy services to <em>good people</em>."
+  activerecord:
+    models:
+      user:
+        avatar_error: "should be less than 5MB"

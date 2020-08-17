@@ -1,0 +1,5 @@
+vi:
+  static_pages:
+    home:
+      welcome: "Xin Chào mừng bạn đã đến với website Elearning"
+      services_html: "Chúng tôi cung cấp các dịch vụ cho <em>người tốt</em>."

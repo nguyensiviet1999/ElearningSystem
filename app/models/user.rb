@@ -21,7 +21,7 @@ class User < ApplicationRecord
   has_many :messages, class_name: "Message", foreign_key: "user_id", dependent: :destroy
   has_many :notifications, as: :recipient
   has_many :host_chatrooms, class_name: "Chatroom", foreign_key: "user_id", dependent: :destroy
-  has_many :join_chatrooms, class_name: "JoinRoom", foreign_key: "user_id",  dependent: :destroy
+  has_many :join_chatrooms, class_name: "JoinRoom", foreign_key: "user_id", dependent: :destroy
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :name, presence: true, length: { maximum: 50 }
@@ -152,8 +152,8 @@ class User < ApplicationRecord
 
   # Validates the size of an uploaded picture.
   def picture_size
-    if avatar.size > 5.megabytes
-      errors.add(:avatar, "should be less than 5MB")
+    if avatar.size > 1.megabytes
+      errors.add(:avatar, I18n.t("activerecord.models.user.avatar_error"))
     end
   end
 end

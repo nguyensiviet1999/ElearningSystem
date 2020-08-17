@@ -17,11 +17,11 @@ Rails.application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-    'Cache-Control' => "public, max-age=#{1.hour.to_i}"
+    "Cache-Control" => "public, max-age=#{1.hour.to_i}",
   }
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
@@ -39,8 +39,21 @@ Rails.application.configure do
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
-  config.action_mailer.delivery_method = :test
-
+  # config.action_mailer.delivery_method = :test
+  host = "http://localhost:3000" # Don't use this literally; use your local dev host
+  # instead
+  config.action_mailer.default_url_options = { host: host, protocol: "http" }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = { from: "no-reply@example.com" }
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: "autoname1999@gmail.com",
+    password: "ilcimepnohpudqqo",
+    authentication: "plain",
+    enable_starttls_auto: true,
+  }
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

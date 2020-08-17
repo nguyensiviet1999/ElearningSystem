@@ -9,7 +9,6 @@ gem "ransack"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem "redis"
-gem "devise"
 #phan trang voi array
 gem "pagy"
 gem "jquery-countdown-rails"
@@ -47,6 +46,9 @@ gem "sendgrid-ruby"
 gem "carrierwave"
 gem "mini_magick"
 gem "fog"
+gem "devise"
+gem "config"
+gem 'rails-i18n'
 group :development, :test do
   gem "sqlite3", "1.4.2"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -72,7 +74,7 @@ group :test do
   gem "guard"
   gem "guard-minitest"
   # Adds support for Capybara system testing and selenium driver
-  gem "capybara", ">= 2.15"
+  gem "capybara"
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"

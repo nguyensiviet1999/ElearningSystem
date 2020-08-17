@@ -37,4 +37,4 @@ users[2..9].each { |user|
 Category.create!(name_category: "English")
 Course.create!(course_name: "English Basic",
                category_id: 1,
-               remote_image_url: "https://nguoikechuyen.net/wp-content/themes/fox/images/placeholder.jpg")
+               remote_image_url: "https://1.bp.blogspot.com/-nHl_GqUD718/XngOmetGs8I/AAAAAAAAZp4/yj0qV6QnG4Ib_smhD0RN6H3hu1NoafpAgCLcBGAsYHQ/s1600/Avatar-Facebook%2B%25283%2529.jpg")
