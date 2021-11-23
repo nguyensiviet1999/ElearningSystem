@@ -153,7 +153,7 @@ class User < ApplicationRecord
   # Validates the size of an uploaded picture.
   def picture_size
     if avatar.size > 1.megabytes
-      errors.add(:avatar, I18n.t("activerecord.models.user.avatar_error"))
+      errors.add(:avatar, "Ảnh nhở hơn 1MB")
     end
   end
 end
