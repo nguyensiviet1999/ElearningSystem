@@ -44,11 +44,12 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "sendgrid-ruby"
 #GEM LOAD ANH
 gem "carrierwave"
-gem "mini_magick"
+gem 'mimemagic', '~> 0.3.10'
 gem "fog"
 gem "devise"
 gem "config"
 gem 'rails-i18n'
+gem 'rubocop', require: false
 group :development, :test do
   gem "sqlite3", "1.4.2"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
