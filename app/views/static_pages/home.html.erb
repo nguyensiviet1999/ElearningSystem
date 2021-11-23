@@ -56,7 +56,7 @@
             </div>
         </div>
          </div>
-        <%=render 'static_pages/ranking'%>
+        <%=render 'static_pages/ranking' unless @rankings.blank?%>
     </div>
     <div class="col-md-8">
         <div class="flex-container">
