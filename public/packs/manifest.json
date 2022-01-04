@@ -1,0 +1,34 @@
+{
+  "application.js": "/packs/js/application-faaa96714ccc0f834995.js",
+  "application.js.map": "/packs/js/application-faaa96714ccc0f834995.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-faaa96714ccc0f834995.js"
+      ],
+      "js.map": [
+        "/packs/js/application-faaa96714ccc0f834995.js.map"
+      ]
+    },
+    "sample": {
+      "js": [
+        "/packs/js/sample-9515a8c6f4a699681cc7.js"
+      ],
+      "js.map": [
+        "/packs/js/sample-9515a8c6f4a699681cc7.js.map"
+      ]
+    },
+    "textToSpeech": {
+      "js": [
+        "/packs/js/textToSpeech-b646b3c69ef9693413a8.js"
+      ],
+      "js.map": [
+        "/packs/js/textToSpeech-b646b3c69ef9693413a8.js.map"
+      ]
+    }
+  },
+  "sample.js": "/packs/js/sample-9515a8c6f4a699681cc7.js",
+  "sample.js.map": "/packs/js/sample-9515a8c6f4a699681cc7.js.map",
+  "textToSpeech.js": "/packs/js/textToSpeech-b646b3c69ef9693413a8.js",
+  "textToSpeech.js.map": "/packs/js/textToSpeech-b646b3c69ef9693413a8.js.map"
+}
