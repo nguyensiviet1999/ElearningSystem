@@ -2,4 +2,4 @@ deployer: "www"
 servers:
   front:
     - "3.110.131.156"
-# notifier: "ruby /home/viet/ElearningSystem/notifier.rb"
+notifier: "ruby /home/viet/ElearningSystem/notifier.rb"
