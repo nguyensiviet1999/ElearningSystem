@@ -48,6 +48,7 @@ gem 'mimemagic', '~> 0.3.10'
 gem "fog"
 gem "devise"
 gem "config"
+gem 'mysql2', '~> 0.5.2'
 gem 'rails-i18n'
 gem 'rubocop', require: false
 group :development, :test do
@@ -66,6 +67,14 @@ group :development do
   gem "rspec-rails"
   gem "rspec-expectations"
   gem "factory_bot_rails"
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano3-puma'
+  gem 'slack-ruby-client'
+  gem 'letter_opener'
 end
 
 group :test do
@@ -82,6 +91,7 @@ group :test do
 end
 group :production do
   gem "pg"
+  gem 'mysql2', '~> 0.5.2'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
