@@ -15,7 +15,7 @@ class CommitStore
 end
 
 Slack.configure do |config|
-  config.token = "xoxe.xoxp-1-Mi0yLTI5MDYxNDk2MTEzODAtMjkxNjUwMjEwODg5Ny0yOTE2NTA1OTk4MTQ1LTI5MDYxNTM1MDI5MDAtYmY1Y2Q0MzY5ZWNjMzljN2VhZGY2NGE3ZDBlZDIzMzMyNjRjYmFhNmU5YjM3MzZjNzQwNmJhN2M2MWZkNDY1Nw"
+  config.token = "smU39ACkZv5q8iO9M8RXRNzH"
 end
 
 # env = ARGV[0]
