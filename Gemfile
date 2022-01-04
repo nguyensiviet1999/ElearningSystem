@@ -44,11 +44,11 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "sendgrid-ruby"
 #GEM LOAD ANH
 gem "carrierwave"
-gem 'mimemagic', '~> 0.3.10'
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f' 
 gem "fog"
 gem "devise"
 gem "config"
-gem 'mysql2', '~> 0.5.2'
+gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'rails-i18n'
 gem 'rubocop', require: false
 group :development, :test do
@@ -91,7 +91,7 @@ group :test do
 end
 group :production do
   gem "pg"
-  gem 'mysql2', '~> 0.5.2'
+  gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
